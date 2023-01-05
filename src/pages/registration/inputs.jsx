@@ -58,7 +58,7 @@ function InputRegistration() {
             </Box>
           ) : (
             <Typography variant="h5" sx={{ padding: 3, fontWeight: 600 }}>
-              Information
+              User Registration
             </Typography>
           )}
           <Box ml={7} mr={3}>

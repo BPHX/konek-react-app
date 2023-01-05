@@ -35,7 +35,7 @@ const rows = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
-export default function DataRoles() {
+export default function UserData() {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -65,13 +65,13 @@ export default function DataRoles() {
                 variant="h5"
                 sx={{ paddingTop: 2, paddingLeft: 3, fontWeight: 600 }}
               >
-                Roles
+                User Information
               </Typography>
             )}
           </Grid>
           <Grid item xs={6} sx={{ textAlign: "right" }}>
             {loading ? (
-              <Box pl={3} ml={5}>
+              <Box pl={3} ml={12}>
                 <Skeleton width="250px" height="7vh">
                   <Typography>.</Typography>
                 </Skeleton>

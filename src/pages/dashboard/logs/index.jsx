@@ -1,6 +1,6 @@
 import React from "react";
-import DataTable from "../../registration/data";
+import UserData from "../../registration/data-user";
 
 export default function Logs() {
-  return <DataTable />;
+  return <UserData />;
 }
