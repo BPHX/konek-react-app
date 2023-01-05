@@ -1,0 +1,87 @@
+body {
+  background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7) 90%, #532267), url("bg.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.home .header{
+  display: inline-block;
+}
+
+
+.home {
+  padding: 40px 100px;
+}
+
+.home .center-box {
+  width: 50vw;
+  text-align: center;
+  margin: auto;
+  margin-top: 25vh;
+  color: #fff;
+}
+
+.home .subtitle {
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.home .title {
+  margin-top: -2vh;
+  font-weight: 600;
+  font-size: 4rem;
+}
+
+.center-box .btn {
+  font-size: large;
+  color: #fff;
+  position: inherit;
+  padding: 5px 25px;
+  border: solid 1px #fff;
+  border-radius: 40px;
+  border-color: #fff;
+  margin-left: -40px;
+}
+
+.home .btn:hover {
+  background-color: rgba(8, 142, 8, 0.5);
+  border: solid 1px #fff;
+  transition: ease-out 0.3s;
+}
+
+
+@keyframes colorChange {
+  0% {
+    color: #4caf50;
+  }
+
+  25% {
+    color: darkviolet;
+  }
+
+  50% {
+    color: green;
+  }
+
+  75% {
+    color: yellowgreen;
+  }
+
+  100% {
+    color: #4caf50;
+  }
+}
+
+.home .color-swap {
+  animation-name: colorChange;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  font-size: 5rem;
+  font-weight: 750;
+}

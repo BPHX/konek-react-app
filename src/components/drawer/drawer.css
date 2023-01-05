@@ -1,0 +1,26 @@
+.drawer-container {
+  background-color: #722d8e !important;
+  border: 0 !important;
+  /* color: #fff !important; */
+}
+
+.trapezoid {
+  content: '';
+  position: absolute;
+  height: 50px;
+  width: 300px;
+  top: -50px;
+  right: 0;
+  border-radius: 50px;
+  box-shadow: 35px 35px 0 10px #eee;
+  z-index: -1;
+}
+
+.trapezoid.bottom {
+  top: 100%;
+  box-shadow: 35px -35px 0 10px #eee;
+}
+
+.padding {
+  margin-top: 13px !important;
+}
