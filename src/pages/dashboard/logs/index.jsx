@@ -1,6 +1,13 @@
 import React from "react";
-import UserData from "../../registration/data-user";
+import { Card, Grid } from "@mui/material";
+import LogsData from "./audit-logs";
 
 export default function Logs() {
-  return <UserData />;
+  return (
+    <Grid item xs={5}>
+      <Card>
+        <LogsData />
+      </Card>
+    </Grid>
+  );
 }

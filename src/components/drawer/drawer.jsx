@@ -13,6 +13,7 @@ import ContactEmergencyIcon from "@mui/icons-material/ContactEmergency";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
+import QuizIcon from "@mui/icons-material/Quiz";
 import DrawerListItem from "./list-item";
 import "./drawer.css";
 
@@ -91,6 +92,7 @@ export default function MiniDrawer({ open }) {
         { text: "Home", icon: HomeIcon, path: "" },
         { text: "Profile", icon: AccountBoxIcon, path: "profile" },
         { text: "Classroom", icon: ClassIcon, path: "classroom" },
+        { text: "Activity", icon: QuizIcon, path: "activity" },
         { text: "Calendar", icon: CalendarMonthIcon, path: "calendar" },
       ];
     }

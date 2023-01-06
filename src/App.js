@@ -24,6 +24,7 @@ import Instructors from "./pages/dashboard/instructor-data";
 import Calendar from "./pages/calendar.jsx";
 import IndexProfile from "./pages/profile";
 import Roles from "./pages/roles";
+import Activity from "./pages/activity";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/dashboard/teachers" element={<Instructors />} />
                 <Route path="/dashboard/calendar" element={<Calendar />} />
                 <Route path="/dashboard/roles" element={<Roles />} />
+                <Route path="/dashboard/activity" element={<Activity />} />
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/room/:id" element={<Room />} />
