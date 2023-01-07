@@ -67,7 +67,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer({ open }) {
-  const activeRole = "admin";
+  const activeRole = "instructor";
 
   const getMenuItems = (role) => {
     if (role === "admin") {
