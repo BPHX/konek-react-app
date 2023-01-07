@@ -32,16 +32,9 @@ function UserRoles() {
     validationSchema: RoleSchema,
     onSubmit: () => {
       setLoading(true);
-      auth
-        .then(() => {
-          console.log("DITO");
-        })
-        .catch(() => {
-          console.log("ERROR");
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      auth.finally(() => {
+        setLoading(false);
+      });
     },
   });
   return (
