@@ -12,27 +12,15 @@ import {
 } from "@mui/material";
 
 const columns = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
-  {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 90,
-  },
+  { field: "id", headerName: "#", width: 70 },
+  { field: "eventId", headerName: "Event ID", width: 300 },
+  { field: "username", headerName: "Username", width: 300 },
+  { field: "eventType", headerName: "Event Type", width: 300 },
+  { field: "timestamp", headerName: "Timestamp", width: 300 },
 ];
 
 const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  { id: 1, eventId: "123", username: "Snow", firstName: "Jon", timestamp: 35 },
 ];
 
 export default function LogsData() {
@@ -121,7 +109,7 @@ export default function LogsData() {
               columns={columns}
               pageSize={10}
               rowsPerPageOptions={[5]}
-              checkboxSelection
+              // checkboxSelection
             />
           )}
         </div>
