@@ -10,16 +10,25 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
+import { v4 as uuidv4 } from "uuid";
 import SelectWidget from "./select-widget";
 import Millionaire from "./activities/millionaire";
 import Roll from "./activities/roll";
 
 function ActivityModal({ open, onClose }) {
-  // eslint-disable-next-line no-unused-vars
-  const [loading, setLoading] = React.useState(true);
-  const [type, setType] = React.useState("roll");
+  // const [loading, setLoading] = React.useState(true);
+  const [type, setType] = React.useState("millionaire");
+  const [items, setItems] = React.useState([{ id: uuidv4() }]);
   const handleClose = () => {
     onClose?.();
+  };
+
+  const handleClick = () => {
+    setItems?.([...items, { id: uuidv4() }]);
+  };
+
+  const handleItemDelete = (item) => {
+    setItems(items.filter((i) => i?.id !== item?.id));
   };
 
   const widgetMap = {
@@ -94,8 +103,33 @@ function ActivityModal({ open, onClose }) {
                     />
                   </Grid>
                   <Grid xs={12} mt={3} mx={5}>
-                    <Box border={4} sx={{ height: "330px" }}>
-                      <Widget />
+                    <Box
+                      border={2}
+                      sx={{
+                        maxHeight: "330px",
+                        height: "330px",
+                        overflowY: "auto",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      {items?.map((item, index) => (
+                        <Widget
+                          key={item?.id}
+                          info={item}
+                          onDelete={handleItemDelete}
+                          allowDelete={items?.length > 1}
+                          autoFocus={index + 1 === items?.length}
+                        />
+                      ))}
+                      <Box sx={{ textAlign: "center" }}>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={handleClick}
+                        >
+                          ADD QUESTION
+                        </Button>
+                      </Box>
                     </Box>
                   </Grid>
                 </Grid>
