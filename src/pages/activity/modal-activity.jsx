@@ -12,8 +12,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 import SelectWidget from "./select-widget";
-import Millionaire from "./activities/millionaire";
-import Roll from "./activities/roll";
+import Millionaire from "./activities/millionaire/millionaire";
+import Roll from "./activities/quiz/roll";
 import "./index.css";
 
 function ActivityModal({ open, onClose }) {

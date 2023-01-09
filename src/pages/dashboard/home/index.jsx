@@ -56,7 +56,7 @@ export default function Home() {
       {/* <Alert severity="warning" sx={{ marginBottom: 3 }}>
         Service Maintenance!!!
       </Alert> */}
-      {renderDashboard("instructor")}
+      {renderDashboard("student")}
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         open={!!message}

@@ -8,6 +8,7 @@ import {
   InputBase,
   Snackbar,
   Grid,
+  Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
@@ -90,7 +91,18 @@ export default function RoomMessage() {
               px={1}
               sx={{ overflow: "auto", maxHeight: "485px", flexGrow: 1 }}
             >
-              <Box sx={{ fontWeight: 600 }}>Jude Bautista : </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <Box mr={2} sx={{ fontWeight: 600 }}>
+                  {" "}
+                  Jude Bautista{" "}
+                </Box>
+                <Typography> 2:48 AM</Typography>
+              </Box>
               <Box>qwe</Box>
               <Box>qwe</Box>
               <Box>qwe</Box>
