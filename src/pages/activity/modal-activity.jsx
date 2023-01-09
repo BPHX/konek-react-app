@@ -112,8 +112,9 @@ function ActivityModal({ open, onClose }) {
                         borderRadius: "5px",
                       }}
                     >
+                      <Widget />
                       {items?.map((item, index) => (
-                        <Widget
+                        <Millionaire
                           key={item?.id}
                           info={item}
                           onDelete={handleItemDelete}
@@ -121,7 +122,7 @@ function ActivityModal({ open, onClose }) {
                           autoFocus={index + 1 === items?.length}
                         />
                       ))}
-                      <Box sx={{ textAlign: "center" }}>
+                      <Box mb={2} sx={{ textAlign: "center" }}>
                         <Button
                           variant="contained"
                           color="primary"

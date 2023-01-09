@@ -1,0 +1,43 @@
+.data-messages {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.data-messages::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+/* Track */
+.data-messages::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 50px;
+}
+
+/* Handle */
+.data-messages::-webkit-scrollbar-thumb {
+  background: rgb(210, 206, 206);
+  border-radius: 50px;
+
+}
+
+.data-messages:hover::-webkit-scrollbar-thumb {
+  background: #999;
+  border-radius: 50px;
+
+}
+
+.content {
+  animation: transitionIn .50s;
+}
+
+
+@keyframes transitionIn {
+  0% {
+    max-width: 0;
+  }
+
+  100% {
+    max-width: 100%;
+  }
+}

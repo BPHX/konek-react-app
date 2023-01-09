@@ -1,22 +1,9 @@
-import {
-  Avatar,
-  AvatarGroup,
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  IconButton,
-  InputBase,
-  Paper,
-  Snackbar,
-} from "@mui/material";
+import { Avatar, AvatarGroup, Box, Grid, Paper } from "@mui/material";
 import React from "react";
-import CloseIcon from "@mui/icons-material/Close";
-import SendIcon from "@mui/icons-material/Send";
 import { useTheme } from "@mui/material/styles";
 import RoomLoader from "./room-loader";
 import RoomActions from "./room-actions";
+import RoomMessage from "./room-message";
 
 export default function Room() {
   const [id, setId] = React.useState(3);
@@ -83,21 +70,6 @@ export default function Room() {
     }
   }, [message]);
 
-  const handleClose = () => {
-    setMessage("");
-  };
-
-  const action = (
-    <IconButton
-      size="small"
-      aria-label="close"
-      color="inherit"
-      onClick={handleClose}
-    >
-      <CloseIcon fontSize="small" />
-    </IconButton>
-  );
-
   return (
     <Paper
       elevation={1}
@@ -141,13 +113,14 @@ export default function Room() {
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
+                  mt={9}
                   sx={{
                     backgroundImage:
                       "url(https://drive.google.com/uc?export=view&id=1omB8yTn99Y3mIuwREHZHjbHUAqPF9CaB)",
                     backgroundPosition: "center",
                     backgroundSize: "100%",
                     backgroundRepeat: "no-repeat",
-                    height: "100%",
+                    height: "80%",
                     borderRadius: "5px",
                   }}
                 >
@@ -209,80 +182,10 @@ export default function Room() {
                   </Box>
                 </Box>
               </Box>
-              {/* <Grid
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  flexGrow: 2,
-                  marginTop: 2,
-                }}
-              >
-                {students.map((student) => (
-                  <RoomParticipant
-                    key={student.id}
-                    image={student.image}
-                    name={student.name}
-                  />
-                ))}
-              </Grid> */}
             </Grid>
-            {messageEnabled && (
+            {!messageEnabled && (
               <Grid item xs={12} md={3}>
-                <Box sx={{ height: "100%", marginLeft: 2 }}>
-                  <Card sx={{ height: "100%" }}>
-                    <CardHeader
-                      action={
-                        <IconButton onClick={() => setMessageEnabled(false)}>
-                          <CloseIcon />
-                        </IconButton>
-                      }
-                      title="Valorant 101"
-                    />
-                    <CardContent sx={{ height: "100%", paddingTop: 0 }}>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          height: "88%",
-                        }}
-                      >
-                        <Box
-                          p={2}
-                          sx={{
-                            backgroundColor: "#eee",
-                            flexGrow: 1,
-                            borderRadius: "5px",
-                          }}
-                        >
-                          Messages
-                        </Box>
-                        <Box
-                          mt={2}
-                          sx={{ backgroundColor: "#eee", borderRadius: "50px" }}
-                        >
-                          <InputBase
-                            sx={{ ml: 2, pr: 7.5, flex: 1 }}
-                            placeholder="Send a Message"
-                          />
-                          <IconButton color="primary" sx={{ p: "10px" }}>
-                            <SendIcon />
-                          </IconButton>
-                        </Box>
-                        <Snackbar
-                          anchorOrigin={{
-                            vertical: "bottom",
-                            horizontal: "left",
-                          }}
-                          open={!!message}
-                          autoHideDuration={6000}
-                          onClose={handleClose}
-                          message={message}
-                          action={action}
-                        />
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </Box>
+                <RoomMessage />
               </Grid>
             )}
           </Grid>

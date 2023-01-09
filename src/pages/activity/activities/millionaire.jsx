@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useFormik } from "formik";
 import useAuth from "../../../auth";
-import ActSchema, { initialAct } from "./schema/act-schema";
+import ActSchema, { initialAct } from "../schema/act-schema";
 
 export default function Millionaire({
   info,

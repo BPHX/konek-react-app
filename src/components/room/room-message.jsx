@@ -7,9 +7,11 @@ import {
   IconButton,
   InputBase,
   Snackbar,
+  Grid,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
+import "./index.css";
 
 export default function RoomMessage() {
   const [message, setMessage] = React.useState("");
@@ -47,14 +49,8 @@ export default function RoomMessage() {
   const [messageEnabled, setMessageEnabled] = React.useState(false);
 
   return (
-    <Box
-      sx={{
-        height: "100%",
-        marginLeft: 2,
-        transition: "width 2s transform 2s",
-      }}
-    >
-      <Card sx={{ height: "100%" }}>
+    <Box className="content" ml={2}>
+      <Card sx={{ height: "93.5vh" }}>
         <CardHeader
           action={
             <IconButton onClick={() => setMessageEnabled(false)}>
@@ -68,27 +64,76 @@ export default function RoomMessage() {
             sx={{
               display: "flex",
               flexDirection: "column",
-              height: "88%",
+              height: "100%",
             }}
           >
             <Box
-              p={2}
+              pt={2}
               sx={{
-                backgroundColor: "#eee",
-                flexGrow: 1,
                 borderRadius: "5px",
               }}
             >
-              Messages
+              <Box
+                sx={{
+                  backgroundColor: "#eee",
+                  px: 3,
+                  py: 2,
+                  borderRadius: "5px",
+                  textAlign: "center",
+                }}
+              >
+                In-call Messages
+              </Box>
             </Box>
-            <Box mt={2} sx={{ backgroundColor: "#eee", borderRadius: "50px" }}>
-              <InputBase
-                sx={{ ml: 2, pr: 7.5, flex: 1 }}
-                placeholder="Send a Message"
-              />
-              <IconButton color="primary" sx={{ p: "10px" }}>
-                <SendIcon />
-              </IconButton>
+            <Box
+              className="data-messages"
+              px={1}
+              sx={{ overflow: "auto", maxHeight: "485px", flexGrow: 1 }}
+            >
+              <Box sx={{ fontWeight: 600 }}>Jude Bautista : </Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+              <Box>qwe</Box>
+            </Box>
+            <Box
+              mt={2}
+              sx={{
+                backgroundColor: "#eee",
+                borderRadius: "50px",
+              }}
+            >
+              <Grid container>
+                <Grid item xs={6} my={1}>
+                  <Box>
+                    <InputBase sx={{ ml: 2 }} placeholder="Send a Message" />
+                  </Box>
+                </Grid>
+                <Grid item xs={6} mt={1.5} pr={2} sx={{ textAlign: "right" }}>
+                  <Box>
+                    <IconButton color="primary" sx={{ p: 0 }}>
+                      <SendIcon />
+                    </IconButton>
+                  </Box>
+                </Grid>
+              </Grid>
             </Box>
             <Snackbar
               anchorOrigin={{

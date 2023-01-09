@@ -12,7 +12,7 @@ export default function Home() {
 
   React.useEffect(() => {
     setTimeout(() => {
-      setMessage("Jude Kalbo");
+      setMessage("Hello, ka-Konek");
     }, 3000);
   }, []);
 
@@ -56,7 +56,7 @@ export default function Home() {
       {/* <Alert severity="warning" sx={{ marginBottom: 3 }}>
         Service Maintenance!!!
       </Alert> */}
-      {renderDashboard("admin")}
+      {renderDashboard("student")}
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         open={!!message}
