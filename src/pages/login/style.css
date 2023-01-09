@@ -8,14 +8,12 @@
 }
 
 .landing-header {
-    margin-top: 30px;
+    margin-top: 150px;
     z-index: 1;
 }
 
-
 .login .landing-header{
     display: inline-block;
-    margin-right: 500px;
 }
 
 .login-form {
@@ -59,8 +57,7 @@
 }
 
 .signup-text {
-    margin-right: 12vh;
-    margin-top: 10vh;
+    margin-top: 15px;
     font-size: small;
     color: #fff;
 }
@@ -71,24 +68,6 @@
     transition: ease-out 0.3s;
 }
 
-.btn-submit {
-    margin-left: -12vh;
-    margin-top: 20px;
-    padding: 8px 35px;
-    border: solid 1px #fff;
-    border-radius: 25px;
-    font-size: 18px;
-    background-color: #2f2f2f;
-    color: #fff;
-    cursor: pointer;
-}
-
-.btn-submit:hover {
-    background-color: green;
-    border: solid 1px #fff;
-    color: #fff;
-    transition: ease-out 0.3s;
-}
 
 #apis {
     display: block;

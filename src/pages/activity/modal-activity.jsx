@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 import SelectWidget from "./select-widget";
 import Millionaire from "./activities/millionaire";
 import Roll from "./activities/roll";
+import "./index.css";
 
 function ActivityModal({ open, onClose }) {
   // const [loading, setLoading] = React.useState(true);
@@ -104,12 +105,13 @@ function ActivityModal({ open, onClose }) {
                   </Grid>
                   <Grid xs={12} mt={3} mx={5}>
                     <Box
+                      className="scroll"
                       border={2}
                       sx={{
                         maxHeight: "330px",
                         height: "330px",
-                        overflowY: "auto",
                         borderRadius: "5px",
+                        overflow: "auto",
                       }}
                     >
                       <Widget />

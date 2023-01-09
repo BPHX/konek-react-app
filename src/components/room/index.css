@@ -28,11 +28,11 @@
 }
 
 .content {
-  animation: transitionIn .50s;
+  animation: width .50s;
 }
 
 
-@keyframes transitionIn {
+@keyframes width {
   0% {
     max-width: 0;
   }

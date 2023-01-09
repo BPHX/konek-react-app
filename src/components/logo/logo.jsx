@@ -7,7 +7,7 @@ import "./logo.css";
 export default function Logo({ lg, className }) {
   return (
     <div className={classNames({ className, logo: true, lg })}>
-      <img src="/images/konek_logo.png" alt="Konek" />
+      <img src="/images/KONEK K logo.png" alt="Konek" />
       <Typography
         component="span"
         variant="title"
