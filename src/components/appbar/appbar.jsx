@@ -99,7 +99,7 @@ export default function MiniAppBar({ open, onMenuClick }) {
           {open ? <CloseIcon /> : <MenuIcon />}
         </IconButton>
 
-        <Logo />
+        <Logo src="/images/KONEK K logo yellow.png" />
 
         <Search>
           <SearchIconWrapper>

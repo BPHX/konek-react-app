@@ -1,9 +1,8 @@
 import React from "react";
-import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useFormik } from "formik";
-import { Button, Typography } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Button, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import LoginSchema, { initialLogin } from "./schema";
 import "./style.css";
 import useAuth from "../../auth";
@@ -34,7 +33,7 @@ export default function LoginForm() {
   });
   return (
     <form id="join-form" autoComplete="off" onSubmit={formik?.handleSubmit}>
-      <div className="textfields">
+      <Box className="textfields">
         <Box
           component="form"
           sx={{
@@ -49,14 +48,17 @@ export default function LoginForm() {
             label="Username"
             name="username"
             color="secondary"
-            // inputlabelprops={{ className: "txt_user" }}
             disabled={loading}
             value={formik?.username}
             onChange={formik.handleChange}
             onBlur={formik.handleBLur}
             error={formik.touched.username && Boolean(formik.errors.username)}
-            helperText={formik.touched.username && formik.errors.username}
-            sx={{ color: "fff" }}
+            focused
+            sx={{
+              "& .MuiInputBase-root": {
+                color: "white.main",
+              },
+            }}
           />
           <TextField
             id="txt-pass"
@@ -64,50 +66,33 @@ export default function LoginForm() {
             type="password"
             color="secondary"
             name="password"
-            // inputlabelprops={{ className: "txt_pass" }}
             disabled={loading}
             value={formik?.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBLur}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
+            focused
+            sx={{
+              "& .MuiInputBase-root": {
+                color: "white.main",
+              },
+            }}
           />
         </Box>
-      </div>
+      </Box>
 
-      <div className="button">
+      <Box mt={2}>
         <Button
           className="btn-submit"
           inputlabelprops={{ className: "btn_submit" }}
           type="submit"
           color="secondary"
+          variant="outlined"
         >
           Login
         </Button>
-      </div>
-
-      <div className="signup-text">
-        <Typography>
-          Dont have an account yet?
-          <Link to="/sign-up" className="signup-link">
-            {" "}
-            Sign up
-          </Link>
-        </Typography>
-      </div>
-
-      {/* <div id="apis">
-        <Link to="/google">
-          <Button id="api-google-btn" type="submit">
-            Sign in with google
-          </Button>
-        </Link>
-        <Link to="/facebook">
-          <Button id="api-fb-btn" type="submit">
-            Sign in with facebook
-          </Button>
-        </Link>
-      </div> */}
+      </Box>
     </form>
   );
 }

@@ -67,7 +67,7 @@ function UserRoles() {
                   variant="h5"
                   sx={{ paddingTop: 3, paddingLeft: 3, fontWeight: 600 }}
                 >
-                  Roles
+                  New Role
                 </Typography>
               )}
             </Grid>

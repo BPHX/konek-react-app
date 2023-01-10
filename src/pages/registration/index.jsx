@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Grid } from "@mui/material";
 import InputRegistration from "./inputs";
-import DataTable from "./data";
+import UserData from "./data-user";
 
 function UserRegistration() {
   return (
@@ -13,7 +13,7 @@ function UserRegistration() {
       </Grid>
       <Grid item xs={7}>
         <Card>
-          <DataTable />
+          <UserData />
         </Card>
       </Grid>
     </Grid>

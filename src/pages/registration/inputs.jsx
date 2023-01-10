@@ -9,6 +9,7 @@ import {
 import { useFormik } from "formik";
 import React from "react";
 import useAuth from "../../auth";
+import Aesthetic from "./aesthetic";
 import TextFieldDatePicker from "./date-picker";
 import UserSchema, { initialUser } from "./schema/user-schema";
 
@@ -58,11 +59,11 @@ function InputRegistration() {
             </Box>
           ) : (
             <Typography variant="h5" sx={{ padding: 3, fontWeight: 600 }}>
-              Information
+              User Registration
             </Typography>
           )}
           <Box ml={7} mr={3}>
-            <Box sx={{ maxHeight: 200 }}>
+            <Box sx={{ maxHeight: 100 }}>
               <Grid container spacing={0}>
                 <Grid item xs={12} md={6} pt={3}>
                   {loading ? (
@@ -243,7 +244,6 @@ function InputRegistration() {
                     display: "flex",
                     justifyContent: "end",
                     alignItems: "right",
-                    // marginRight: 1,
                     marginTop: -4,
                   }}
                 >
@@ -252,9 +252,20 @@ function InputRegistration() {
                   </Skeleton>
                 </Box>
               ) : (
-                <Button variant="contained" color="primary" type="submit">
-                  Register
-                </Button>
+                <Grid container>
+                  <Grid item xs={6} mt={-15}>
+                    <Box
+                      sx={{ display: "flex", justifyContent: "left", width: 0 }}
+                    >
+                      <Aesthetic />
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6} mt={13}>
+                    <Button variant="contained" color="primary" type="submit">
+                      Register
+                    </Button>
+                  </Grid>
+                </Grid>
               )}
             </Box>
           </Box>

@@ -1,6 +1,13 @@
 import React from "react";
-import DataTable from "../../registration/data";
+import { Card, Grid } from "@mui/material";
+import LogsData from "./audit-logs";
 
 export default function Logs() {
-  return <DataTable />;
+  return (
+    <Grid item xs={5}>
+      <Card>
+        <LogsData />
+      </Card>
+    </Grid>
+  );
 }
