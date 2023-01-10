@@ -4,6 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import RoomLoader from "./room-loader";
 import RoomActions from "./room-actions";
 import RoomMessage from "./room-message";
+import RoomMillionaire from "../../pages/activity/activities/millionaire/room-millionaire";
 
 export default function Room() {
   const [id, setId] = React.useState(3);
@@ -13,6 +14,8 @@ export default function Room() {
   const [videoEnabled, setVideoEnabled] = React.useState(false);
 
   const [messageEnabled, setMessageEnabled] = React.useState(false);
+
+  const [millionaireEnabled, setMillionaireEnabled] = React.useState(false);
 
   const [students, setStudents] = React.useState([]);
 
@@ -55,12 +58,6 @@ export default function Room() {
   const theme = useTheme();
 
   const [message, setMessage] = React.useState("");
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setMessage("Jude Kalbo Joined");
-    }, 3000);
-  }, []);
 
   React.useEffect(() => {
     if (message) {
@@ -109,6 +106,11 @@ export default function Room() {
                   position: "relative",
                 }}
               >
+                {millionaireEnabled && (
+                  <Grid item xs={12} md={3}>
+                    <RoomMillionaire />
+                  </Grid>
+                )}
                 <Box
                   display="flex"
                   justifyContent="center"
@@ -177,6 +179,8 @@ export default function Room() {
                         onVideoToggle={(e) => setVideoEnabled(e)}
                         messageEnabled={messageEnabled}
                         onMessageToggle={(e) => setMessageEnabled(e)}
+                        millionaireEnabled={millionaireEnabled}
+                        onMillionaireToggle={(e) => setMillionaireEnabled(e)}
                       />
                     </Box>
                   </Box>

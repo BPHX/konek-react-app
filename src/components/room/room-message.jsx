@@ -6,15 +6,16 @@ import {
   CardHeader,
   IconButton,
   InputBase,
-  Snackbar,
+  // Snackbar,
   Grid,
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import PropTypes from "prop-types";
 import SendIcon from "@mui/icons-material/Send";
 import "./index.css";
 
-export default function RoomMessage() {
+export default function RoomMessage({ onClose }) {
   const [message, setMessage] = React.useState("");
 
   React.useEffect(() => {
@@ -32,29 +33,27 @@ export default function RoomMessage() {
   }, [message]);
 
   const handleClose = () => {
+    onClose?.();
     setMessage("");
   };
 
-  const action = (
-    <IconButton
-      size="small"
-      aria-label="close"
-      color="inherit"
-      onClick={handleClose}
-    >
-      <CloseIcon fontSize="small" />
-    </IconButton>
-  );
-
-  // eslint-disable-next-line no-unused-vars
-  const [messageEnabled, setMessageEnabled] = React.useState(false);
+  // const action = (
+  //   <IconButton
+  //     size="small"
+  //     aria-label="close"
+  //     color="inherit"
+  //     onClick={handleClose}
+  //   >
+  //     <CloseIcon fontSize="small" />
+  //   </IconButton>
+  // );
 
   return (
     <Box className="content" ml={2}>
       <Card sx={{ height: "93.5vh" }}>
         <CardHeader
           action={
-            <IconButton onClick={() => setMessageEnabled(false)}>
+            <IconButton onClick={handleClose}>
               <CloseIcon />
             </IconButton>
           }
@@ -147,7 +146,7 @@ export default function RoomMessage() {
                 </Grid>
               </Grid>
             </Box>
-            <Snackbar
+            {/* <Snackbar
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "left",
@@ -157,10 +156,18 @@ export default function RoomMessage() {
               onClose={handleClose}
               message={message}
               action={action}
-            />
+            /> */}
           </Box>
         </CardContent>
       </Card>
     </Box>
   );
 }
+
+RoomMessage.defaultProps = {
+  onClose: () => {},
+};
+// Typechecking props of the MDAlert
+RoomMessage.propTypes = {
+  onClose: PropTypes.func,
+};

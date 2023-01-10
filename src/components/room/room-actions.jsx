@@ -9,6 +9,8 @@ import MicOffIcon from "@mui/icons-material/MicOff";
 import VideocamOffOutlinedIcon from "@mui/icons-material/VideocamOffOutlined";
 import MessageIcon from "@mui/icons-material/Message";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
+import VideogameAssetOffIcon from "@mui/icons-material/VideogameAssetOff";
 import { useTheme } from "@mui/material/styles";
 
 export default function RoomActions({
@@ -19,8 +21,8 @@ export default function RoomActions({
   onVideoToggle,
   messageEnabled,
   onMessageToggle,
-  // open,
-  // onClose,
+  millionaireEnabled,
+  onMillionaireToggle,
 }) {
   const theme = useTheme();
 
@@ -40,6 +42,9 @@ export default function RoomActions({
     onMessageToggle?.(!messageEnabled);
   };
 
+  const handleGame = () => {
+    onMillionaireToggle?.(!millionaireEnabled);
+  };
   return (
     <Grid sx={{ display: "flex", flexDirection: "column", flexGrow: 2 }}>
       <Box
@@ -102,6 +107,19 @@ export default function RoomActions({
             {messageEnabled ? <MessageIcon /> : <ChatBubbleIcon />}
           </IconButton>
         </Box>
+        <Box sx={{ position: "absolute", left: 10 }}>
+          <IconButton
+            onClick={handleGame}
+            size="large"
+            sx={{ color: theme.palette.white.main }}
+          >
+            {millionaireEnabled ? (
+              <VideogameAssetIcon />
+            ) : (
+              <VideogameAssetOffIcon />
+            )}
+          </IconButton>
+        </Box>
       </Box>
     </Grid>
   );
@@ -115,8 +133,8 @@ RoomActions.defaultProps = {
   onEnd: () => {},
   onVideoToggle: () => {},
   onMessageToggle: () => {},
-  // open: false,
-  // onClose: () => {},
+  millionaireEnabled: () => {},
+  onMillionaireToggle: () => {},
 };
 // Typechecking props of the MDAlert
 RoomActions.propTypes = {
@@ -127,6 +145,6 @@ RoomActions.propTypes = {
   onEnd: PropTypes.func,
   onVideoToggle: PropTypes.func,
   onMessageToggle: PropTypes.func,
-  // open: false,
-  // onClose: PropTypes.func,
+  millionaireEnabled: PropTypes.func,
+  onMillionaireToggle: PropTypes.func,
 };
