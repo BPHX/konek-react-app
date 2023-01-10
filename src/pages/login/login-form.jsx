@@ -20,12 +20,9 @@ export default function LoginForm() {
       auth
         ?.login()
         .then(() => {
-          console.log("DITO");
           navigate("/dashboard");
         })
-        .catch(() => {
-          console.log("ERROR");
-        })
+        .catch(() => {})
         .finally(() => {
           setLoading(false);
         });

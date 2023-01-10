@@ -30,12 +30,8 @@ function InputRegistration() {
     onSubmit: () => {
       setLoading(true);
       auth
-        .then(() => {
-          console.log("DITO");
-        })
-        .catch(() => {
-          console.log("ERROR");
-        })
+        .then(() => {})
+        .catch(() => {})
         .finally(() => {
           setLoading(false);
         });
