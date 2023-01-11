@@ -1,12 +1,12 @@
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import classNames from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 import "./logo.css";
 
-export default function Logo({ lg, className }) {
+export default function Logo({ lg, className, ...rest }) {
   return (
-    <div className={classNames({ className, logo: true, lg })}>
+    <Box className={classNames({ className, logo: true, lg })} {...rest}>
       <img src="/images/logo.png" alt="Konek" />
       <Typography
         component="span"
@@ -14,7 +14,7 @@ export default function Logo({ lg, className }) {
         className="text"
         sx={{ display: { xs: "none", sm: "inline" } }}
       />
-    </div>
+    </Box>
   );
 }
 

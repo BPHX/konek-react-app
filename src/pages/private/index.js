@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import AppLoader from "../../components/loader/app-loader";
 import useAuth, { withAuth } from "../../hooks/use-auth";
 import useToken, { SESSION_TOKEN_KEY, withToken } from "../../hooks/use-token";
 import DashboardPage from "./dashboard/dashboard-page";
@@ -10,7 +11,7 @@ function PrivateLayout() {
 
   if (!token) return <Navigate to="/landing" />;
 
-  if (loading) return <>Loading</>;
+  if (loading) return <AppLoader />;
 
   if (token && !user) {
     sessionStorage.removeItem(SESSION_TOKEN_KEY);
