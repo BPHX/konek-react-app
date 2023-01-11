@@ -13,7 +13,7 @@
 
 .landing-page .frm-sign-in {
   position: absolute;
-  width: 50vw;
+  width: 40vw;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -22,7 +22,7 @@
 
 .landing-page .frm-bg {
   position: absolute;
-  width: 100vw;
+  width: 85vw;
   height: 140vh;
   top: 0;
   left: -40vw;
@@ -46,7 +46,6 @@
   z-index:1;
   position: relative;
   text-align:center;
-  margin-top: -20vh;
 }
 
 .landing-page .frm-container fieldset,
@@ -57,8 +56,71 @@
   color: #fff;
 }
 
-
-
 .landing-page .intro {
   text-align: center;
+  width: 50vw;
+  text-align: center;
+  margin: auto;
+  margin-top: 10vh;
+  color: #fff;
+}
+
+@keyframes colorChange {
+  0% {
+    color: #4caf50;
+  }
+
+  25% {
+    color: darkviolet;
+  }
+
+  50% {
+    color: green;
+  }
+
+  75% {
+    color: yellowgreen;
+  }
+
+  100% {
+    color: #4caf50;
+  }
+}
+
+.intro .color-swap {
+  animation-name: colorChange;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  font-size: 5rem;
+  font-weight: 750;
+}
+
+.intro .title {
+  margin-top: -2vh;
+  font-weight: 600;
+  font-size: 4rem;
+}
+
+.intro .subtitle {
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.intro .btn {
+  font-size: large;
+  color: #fff;
+  position: inherit;
+  padding: 5px 25px;
+  border: solid 1px #fff;
+  border-radius: 40px;
+  border-color: #fff;
+  margin-left: -40px;
+}
+
+.intro .btn:hover {
+  background-color: rgba(8, 142, 8, 0.5);
+  border: solid 1px #fff;
+  transition: ease-out 0.3s;
 }
