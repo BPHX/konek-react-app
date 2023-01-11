@@ -14,12 +14,17 @@ function PrivateLayout() {
 
   if (token && !user) {
     sessionStorage.removeItem(SESSION_TOKEN_KEY);
-    return <Navigate to="/sign-in" state={{ message: "Session Expired" }} />;
+    return (
+      <Navigate
+        to="/sign-in"
+        state={{ message: "Invalid User / Session Expired" }}
+      />
+    );
   }
 
   return (
     <>
-      Private {token}
+      Private {JSON.stringify(user)}
       <Outlet />
     </>
   );

@@ -1,21 +1,23 @@
 import React, { createContext } from "react";
 import PropTypes from "prop-types";
 import useToken from "./use-token";
+import useUserService from "./use-user-service";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [token] = useToken();
+  const userService = useUserService();
   const [loading, setLoading] = React.useState(true);
   const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
     if (token) {
       setLoading(true);
-      Promise.resolve(123).then(() =>
+      userService.getCurrentUser().then((user) =>
         setTimeout(() => {
           setLoading(false);
-          setData({});
+          setData(user);
         }, 3000)
       );
     } else {

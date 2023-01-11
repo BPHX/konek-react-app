@@ -1,4 +1,4 @@
-// import SignInPage from "./sign-in";
+import SignInPage from "./sign-in";
 import SignOutPage from "./sign-out";
 
 const authRoutes = [
@@ -8,7 +8,7 @@ const authRoutes = [
   },
   {
     path: "/sign-in",
-    element: null,
+    element: <SignInPage />,
   },
   {
     path: "/sign-out",

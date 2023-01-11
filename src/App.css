@@ -7,13 +7,3 @@ div#root, body {
   height: 100vh;
   width: 100vw;
 }
-
-.landing-page {
-  background-attachment: fixed;
-  background-image: linear-gradient(rgba(4,9,30,.7),rgba(4,9,30,.7) 90%,#532267), url('/public/images/bg.jpg');
-  background-size: cover;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  height: 100vh;
-  width: 100vw;
-}

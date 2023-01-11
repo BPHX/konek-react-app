@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import useToken, { withToken } from "../../../hooks/use-token";
+import useToken from "../../../hooks/use-token";
 
 function SignInPage() {
   const [token] = useToken();
@@ -8,4 +8,4 @@ function SignInPage() {
   if (token) return <Navigate to="/" />;
 }
 
-export default withToken(SignInPage);
+export default SignInPage;
