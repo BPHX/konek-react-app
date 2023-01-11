@@ -63,7 +63,7 @@ DrawerListItem.defaultProps = {
   text: "",
   icon: null,
   onClick: () => {},
-  selected: null,
+  selected: false,
   hideBorderTop: false,
   hideBorderBottom: false,
 };
@@ -73,8 +73,7 @@ DrawerListItem.propTypes = {
   text: PropTypes.string,
   icon: PropTypes.element,
   onClick: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  selected: PropTypes.object,
+  selected: PropTypes.bool,
   hideBorderTop: PropTypes.bool,
   hideBorderBottom: PropTypes.bool,
 };

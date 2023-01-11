@@ -1,9 +1,10 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
-import Divider from "@mui/material/Divider";
+import { Divider } from "@mui/material";
 import PropTypes from "prop-types";
 import "./drawer.css";
+import CustomHeader from "./header";
 
 const drawerWidth = 240;
 
@@ -54,23 +55,28 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer({ open }) {
+export default function MiniDrawer({ open, children }) {
   return (
     <Drawer
       variant="permanent"
       open={open}
       classes={{ paper: "drawer-container" }}
     >
-      <DrawerHeader>{/* TBA */}</DrawerHeader>
+      <DrawerHeader>
+        <CustomHeader />
+      </DrawerHeader>
       <Divider />
+      {children}
     </Drawer>
   );
 }
 
 MiniDrawer.defaultProps = {
   open: false,
+  children: null,
 };
 // Typechecking props of the MDAlert
 MiniDrawer.propTypes = {
   open: PropTypes.bool,
+  children: PropTypes.node,
 };

@@ -1,13 +1,94 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import { Box, List, CircularProgress } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 import AppLoader from "../../components/loader/app-loader";
 import useAuth, { withAuth } from "../../hooks/use-auth";
 import useToken, { SESSION_TOKEN_KEY, withToken } from "../../hooks/use-token";
 import DashboardPage from "./dashboard/dashboard-page";
+import MiniAppBar from "../../components/appbar/appbar";
+import MiniDrawer from "../../components/drawer/drawer";
+import DrawerListItem from "../../components/drawer/list-item";
+import useUserService from "../../hooks/use-user-service";
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
+
+const childRoutes = [
+  {
+    path: "/",
+    element: <DashboardPage />,
+    name: "Dashboard",
+    icon: null,
+    permissions: [],
+  },
+  {
+    path: "/profile",
+    element: <>Something</>,
+    name: "My Profile",
+    icon: null,
+    permissions: ["user:profile:view"],
+  },
+];
+
+function getPermittedRoutes(permissions) {
+  return childRoutes.filter((route) => {
+    if (!route.permissions?.length) return true;
+    if (!permissions?.length) return false;
+    const acls = route.permissions;
+    const granted = acls.filter((acl) => permissions.indexOf(acl) > -1);
+    return granted.length === acls.length;
+  });
+}
 
 function PrivateLayout() {
   const [token] = useToken();
   const [loading, user] = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const userService = useUserService();
+  const [permissions, setPermissions] = React.useState([]);
+  const [menuLoading, setMenuLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    setMenuLoading(true);
+    userService
+      .getCurrentUserPermissions()
+      .then((p) => setPermissions(p))
+      .finally(() => setMenuLoading(false));
+  }, []);
+
+  const [open, setOpen] = React.useState(false);
+  const routes = React.useMemo(
+    () =>
+      getPermittedRoutes(permissions).map((route, index) => (
+        <DrawerListItem
+          key={route?.path || route?.name || index}
+          text={route.name}
+          icon={route.icon}
+          selected={location.pathname === route.path}
+          open={open}
+          onClick={() => navigate(route.path)}
+        />
+      )),
+    [permissions, location, open]
+  );
+
+  const handleDrawerOpen = (b) => {
+    setOpen(b);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   if (!token) return <Navigate to="/landing" />;
 
@@ -24,10 +105,27 @@ function PrivateLayout() {
   }
 
   return (
-    <>
-      Private {JSON.stringify(user)}
-      <Outlet />
-    </>
+    <Box
+      sx={{
+        display: "flex",
+        height: "100vh",
+        overflowY: "auto",
+        backgroundColor: "#eee",
+      }}
+    >
+      <CssBaseline />
+      <MiniAppBar open={open} onMenuClick={handleDrawerOpen} />
+      <MiniDrawer open={open} onDrawerClose={handleDrawerClose}>
+        {!menuLoading && <List className="padding">{routes}</List>}
+        {menuLoading && <CircularProgress color="inherit" />}
+      </MiniDrawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, width: "80%" }}>
+        <DrawerHeader />
+        <div>
+          <Outlet />
+        </div>
+      </Box>
+    </Box>
   );
 }
 
@@ -37,12 +135,7 @@ const privateRoutes = [
   {
     path: "/",
     element: <PrivateRoute />,
-    children: [
-      {
-        path: "/",
-        element: <DashboardPage />,
-      },
-    ],
+    children: childRoutes,
   },
 ];
 

@@ -23,9 +23,14 @@ export default function useUserService() {
       return client.post(`/verify`, { permissions }).then(({ data }) => data);
     }
 
+    function getCurrentUserPermissions() {
+      return client.get(`/whoami/permissions`).then(({ data }) => data);
+    }
+
     return {
       getCurrentUser,
       isAuthorized,
+      getCurrentUserPermissions,
     };
   }, [config]);
 
