@@ -8,7 +8,7 @@ export default function RoomMillionaire({ title, answer }) {
       className="million"
       sx={{
         position: "absolute",
-        top: "50%",
+        top: "60%",
         height: "285px",
         width: "100%",
         zIndex: 1,
