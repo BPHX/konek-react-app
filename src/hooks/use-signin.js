@@ -25,7 +25,7 @@ export default function useSignIn() {
         .then(({ data }) => data)
         .then((user) => {
           const { type, token, ...rest } = user;
-          sessionStorage.setItem(SESSION_TOKEN_KEY, `${type} ${token}`);
+          localStorage.setItem(SESSION_TOKEN_KEY, `${type} ${token}`);
           return rest;
         });
     }

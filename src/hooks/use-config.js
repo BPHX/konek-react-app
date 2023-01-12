@@ -8,6 +8,7 @@ export function ConfigProvider({ children }) {
     () => ({
       apiUrl: process.env.REACT_APP_API_URL,
       apiKey: process.env.REACT_APP_SYS_KEY,
+      agoraAppId: process.env.REACT_APP_AGORA_APP_ID,
     }),
     []
   );

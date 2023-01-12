@@ -128,7 +128,7 @@ function PrivateLayout() {
   if (loading) return <AppLoader />;
 
   if (token && !user) {
-    sessionStorage.removeItem(SESSION_TOKEN_KEY);
+    localStorage.removeItem(SESSION_TOKEN_KEY);
     return (
       <Navigate
         to="/sign-in"

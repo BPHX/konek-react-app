@@ -8,7 +8,7 @@ export default function ParticipantInfo({ user, loading }) {
   const token = useToken();
   const [name, setName] = React.useState("Guest");
 
-  if (token)
+  if (!token)
     return (
       <Box mt={3}>
         <Typography>You are joining as:</Typography>
