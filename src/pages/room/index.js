@@ -3,11 +3,14 @@ import { Navigate, Outlet } from "react-router-dom";
 import ConferenceSession from "./session";
 import ConferenceLobby from "./lobby";
 import { AuthProvider } from "../../hooks/use-auth";
+import { AgoraProvider } from "../../hooks/use-agora";
 
 function PageLayout() {
   return (
     <AuthProvider>
-      <Outlet />
+      <AgoraProvider>
+        <Outlet />
+      </AgoraProvider>
     </AuthProvider>
   );
 }

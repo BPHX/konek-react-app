@@ -5,11 +5,14 @@ import { Box, Grid, Typography } from "@mui/material";
 export default function RoomMillionaire({ title, answer }) {
   return (
     <Box
+      className="million"
       sx={{
         position: "absolute",
         top: "50%",
         height: "285px",
         width: "100%",
+        zIndex: 1,
+        opacity: 0.5,
       }}
     >
       <Box

@@ -5,7 +5,7 @@ import useToken, { withToken } from "../../../hooks/use-token";
 function SignOutPage() {
   const [token, setToken] = useToken();
   if (token) {
-    sessionStorage.clear();
+    localStorage.clear();
     setToken(null);
     return <Navigate to="/sign-in" state={{ message: "Logout Successful" }} />;
   }

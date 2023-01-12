@@ -1,17 +1,22 @@
 import { Avatar, AvatarGroup, Box, Grid, Paper } from "@mui/material";
+import AgoraRTC from "agora-rtc-sdk-ng";
 import React from "react";
 import { useTheme } from "@mui/material/styles";
+import { useParams } from "react-router-dom";
 import RoomLoader from "./room-loader";
 import RoomActions from "./room-actions";
 import RoomMessage from "./room-message";
 import RoomMillionaire from "../../private/dashboard/teacher/activity/activities/room-millionaire";
+import useAgora from "../../../hooks/use-agora";
+import useRoomService from "../../../hooks/use-room-service";
 
 export default function ConferenceSession() {
-  const [id, setId] = React.useState(3);
+  const videoRef = React.createRef();
+  const [audioEnabled, setAudioEnabled] = React.useState(null);
+  const [audioPlayer, setAudioPlayer] = React.useState(null);
 
-  const [audioEnabled, setAudioEnabled] = React.useState(false);
-
-  const [videoEnabled, setVideoEnabled] = React.useState(false);
+  const [videoEnabled, setVideoEnabled] = React.useState(null);
+  const [videoPlayer, setVideoPlayer] = React.useState(null);
 
   const [messageEnabled, setMessageEnabled] = React.useState(false);
 
@@ -19,12 +24,19 @@ export default function ConferenceSession() {
 
   const [students, setStudents] = React.useState([]);
 
+  const [loadingToken, setLoadingToken] = React.useState(false);
+
+  const roomService = useRoomService();
+
+  const [loadingAgora, engine, join] = useAgora();
+
   const [loading, setLoading] = React.useState(true);
 
+  const { id: roomid } = useParams();
+
+  const [token, setToken] = React.useState(null);
+
   React.useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
     setStudents([
       {
         id: "1",
@@ -41,38 +53,48 @@ export default function ConferenceSession() {
     ]);
   }, []);
 
-  const join = () => {
-    setStudents([
-      ...students,
-      {
-        id,
-        name: `user ${id}`,
-        image:
-          "https://drive.google.com/uc?export=view&id=1omB8yTn99Y3mIuwREHZHjbHUAqPF9CaB",
-      },
-    ]);
-    setId(id + 1);
-  };
-
   const [hover, setHover] = React.useState(false);
   const theme = useTheme();
 
-  const [message, setMessage] = React.useState("");
+  React.useEffect(() => {
+    setLoadingToken(true);
+    roomService
+      .getRoomToken(roomid)
+      .then((d) => setToken(d.token))
+      .finally(() => setLoadingToken(false));
+  }, []);
 
   React.useEffect(() => {
-    if (message) {
-      setTimeout(() => {
-        setMessage("");
-      }, 5000);
+    if (!loadingToken && token && videoRef) {
+      join(token).then(() => {
+        const video = AgoraRTC.createCameraVideoTrack();
+        const audio = AgoraRTC.createMicrophoneAudioTrack();
+        Promise.all([video, audio]).then(([v, a]) => {
+          engine.publish([a, v]).then(() => {
+            setVideoPlayer(v);
+            setAudioPlayer(a);
+            setLoading(false);
+            v.play(videoRef.current);
+          });
+        });
+      });
     }
-  }, [message]);
+  }, [token, loadingToken, videoRef]);
+
+  React.useEffect(() => {
+    videoPlayer?.setEnabled(videoEnabled);
+  }, [videoEnabled, videoPlayer]);
+
+  React.useEffect(() => {
+    audioPlayer?.setEnabled(audioEnabled);
+  }, [audioEnabled, audioPlayer]);
 
   return (
     <Paper
       elevation={1}
       sx={{ minHeight: 300, position: "relative", width: "100%" }}
     >
-      {loading && <RoomLoader />}
+      {(loadingAgora || loadingToken || loading) && <RoomLoader />}
       <div className="widget-container">
         <Box
           sx={{
@@ -112,20 +134,26 @@ export default function ConferenceSession() {
                   </Grid>
                 )}
                 <Box
+                  position="relative"
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
                   mt={9}
                   sx={{
-                    backgroundImage:
-                      "url(https://drive.google.com/uc?export=view&id=1omB8yTn99Y3mIuwREHZHjbHUAqPF9CaB)",
-                    backgroundPosition: "center",
-                    backgroundSize: "100%",
-                    backgroundRepeat: "no-repeat",
                     height: "80%",
                     borderRadius: "5px",
                   }}
                 >
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      width: "100%",
+                      height: "100%",
+                      top: 0,
+                      left: 0,
+                    }}
+                    ref={videoRef}
+                  />
                   <Box
                     onMouseEnter={() => setHover(true)}
                     onMouseLeave={() => setHover(false)}
@@ -172,11 +200,11 @@ export default function ConferenceSession() {
                       }}
                     >
                       <RoomActions
-                        onEnd={join}
+                        // onEnd={joinCall}
                         audioEnabled={audioEnabled}
-                        onAudioToggle={(e) => setAudioEnabled(e)}
+                        onAudioToggle={setAudioEnabled}
                         videoEnabled={videoEnabled}
-                        onVideoToggle={(e) => setVideoEnabled(e)}
+                        onVideoToggle={setVideoEnabled}
                         messageEnabled={messageEnabled}
                         onMessageToggle={(e) => setMessageEnabled(e)}
                         millionaireEnabled={millionaireEnabled}

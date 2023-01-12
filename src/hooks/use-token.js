@@ -7,7 +7,7 @@ const TokenContext = createContext(null);
 
 export function TokenProvider({ children }) {
   const [token, setToken] = React.useState(
-    sessionStorage.getItem(SESSION_TOKEN_KEY)
+    localStorage.getItem(SESSION_TOKEN_KEY)
   );
 
   const value = React.useMemo(() => [token, setToken], [token, setToken]);

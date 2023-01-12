@@ -3,9 +3,16 @@ import { Box, Paper, Grid, Typography, Button } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../../components/logo/logo";
 import ParticipantInfo from "./participant-info";
+import useAuth from "../../../hooks/use-auth";
+import useAgora from "../../../hooks/use-agora";
 
 export default function ConferenceLobby() {
   const location = useLocation();
+  const [loading, auth] = useAuth();
+  const [agoraLoading] = useAgora();
+
+  const disabledAction = loading || agoraLoading;
+
   return (
     <Box
       sx={{
@@ -52,7 +59,7 @@ export default function ConferenceLobby() {
                   <Typography>Elapsed Time Here</Typography>
                 </Box>
                 <Box sx={{ flexGrow: 1 }}>
-                  <ParticipantInfo />
+                  <ParticipantInfo user={auth} loading={loading} />
                 </Box>
               </Box>
             </Grid>
@@ -96,11 +103,22 @@ export default function ConferenceLobby() {
             <Grid item xs={6} />
             <Grid item xs={6} sx={{ textAlign: "right" }}>
               <Button variant="text">Exit</Button>
-              <Link to={`${location.pathname}/session`}>
-                <Button variant="contained" sx={{ width: 100 }}>
+              {disabledAction && (
+                <Button variant="contained" sx={{ width: 100 }} disabled>
                   Join
                 </Button>
-              </Link>
+              )}
+              {!disabledAction && (
+                <Link to={`${location.pathname}/session`}>
+                  <Button
+                    variant="contained"
+                    sx={{ width: 100 }}
+                    disabled={disabledAction}
+                  >
+                    Join
+                  </Button>
+                </Link>
+              )}
             </Grid>
           </Grid>
         </Box>
