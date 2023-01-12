@@ -4,7 +4,7 @@ import { useTheme } from "@mui/material/styles";
 import RoomLoader from "./room-loader";
 import RoomActions from "./room-actions";
 import RoomMessage from "./room-message";
-// import RoomMillionaire from "../../pages/activity/activities/millionaire/room-millionaire";
+import RoomMillionaire from "../../private/dashboard/teacher/activity/activities/room-millionaire";
 
 export default function ConferenceSession() {
   const [id, setId] = React.useState(3);
@@ -106,11 +106,11 @@ export default function ConferenceSession() {
                   position: "relative",
                 }}
               >
-                {/* {millionaireEnabled && (
+                {millionaireEnabled && (
                   <Grid item xs={12} md={3}>
                     <RoomMillionaire />
                   </Grid>
-                )} */}
+                )}
                 <Box
                   display="flex"
                   justifyContent="center"

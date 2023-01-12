@@ -17,6 +17,7 @@ export default function UserData() {
   // eslint-disable-next-line no-unused-vars
   const [selected, setSelected] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  const [search, setSearch] = React.useState("");
   const [users, setUsers] = React.useState([]);
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -40,11 +41,18 @@ export default function UserData() {
 
   const userService = useUserService();
 
-  React.useEffect(() => {
+  const handleSearch = () => {
     userService
-      .getUsers()
+      .getUsers(search)
       .then((u) => setUsers(u))
       .finally(() => setLoading(false));
+  };
+
+  const handleSearchChange = (evt) => {
+    setSearch(evt.target.value);
+  };
+  React.useEffect(() => {
+    handleSearch();
   }, []);
 
   return (
@@ -87,13 +95,15 @@ export default function UserData() {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment>
-                      <IconButton>
+                      <IconButton onClick={handleSearch}>
                         <SearchIcon />
                       </IconButton>
                     </InputAdornment>
                   ),
                 }}
                 sx={{ m: 1 }}
+                onChange={handleSearchChange}
+                value={search}
               />
             )}
           </Grid>

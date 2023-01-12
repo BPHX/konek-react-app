@@ -23,8 +23,10 @@ export default function useRoleService() {
       return client.get(`/permission`).then(({ data }) => data);
     }
 
-    function getRoles() {
-      return client.get(`/role`).then(({ data }) => data);
+    function getRoles(search) {
+      return client
+        .get(`/role`, { params: { search } })
+        .then(({ data }) => data);
     }
 
     return {

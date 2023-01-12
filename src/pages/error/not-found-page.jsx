@@ -2,15 +2,10 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { Box, Typography } from "@mui/material";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./index.css";
 
 export default function NotFound() {
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate("/landing");
-  };
-
   const { state } = useLocation();
 
   return (
@@ -27,18 +22,6 @@ export default function NotFound() {
             The page {state?.path} you`re looking for cannot be found.
           </Typography>
           <Stack spacing={2} direction="row" className="buttons">
-            <Button
-              onClick={goBack}
-              variant="contained"
-              sx={{
-                padding: "10px 40px",
-                borderRadius: "20px",
-                fontSize: "15px",
-                marginRight: "100px",
-              }}
-            >
-              Back
-            </Button>
             <Button
               variant="contained"
               sx={{

@@ -27,8 +27,10 @@ export default function useUserService() {
       return client.get(`/whoami/permissions`).then(({ data }) => data);
     }
 
-    function getUsers() {
-      return client.get(`/user`).then(({ data }) => data);
+    function getUsers(search) {
+      return client
+        .get(`/user`, { params: { search } })
+        .then(({ data }) => data);
     }
 
     return {

@@ -6,20 +6,19 @@ import {
   Typography,
   Skeleton,
   IconButton,
-  InputAdornment,
   Modal,
   Card,
 } from "@mui/material";
 import { useFormik } from "formik";
 import React from "react";
 import SaveIcon from "@mui/icons-material/Save";
-import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
-import DataNewRole from "./permission-list";
+import Permissionlist from "./permission-list";
 import RoleSchema, { initialRole } from "./schema/role-schema";
 import authRoutes from "../../auth";
 
-export default function RoleInfo({ open, onClose }) {
+export default function RoleInfo({ open, onClose, onSuccess }) {
   const [loading, setLoading] = React.useState(true);
   const handleClose = () => {
     onClose?.();
@@ -38,7 +37,9 @@ export default function RoleInfo({ open, onClose }) {
     onSubmit: () => {
       setLoading(true);
       authRoutes
-        .then(() => {})
+        .then(() => {
+          onSuccess?.();
+        })
         .catch(() => {})
         .finally(() => {
           setLoading(false);
@@ -64,9 +65,22 @@ export default function RoleInfo({ open, onClose }) {
             border={4}
             borderLeft={0}
             borderRight={0}
-            borderColor="primary.main"
+            borderColor="primary.light"
+            borderRadius="7px"
           >
             <Card>
+              <Box
+                className="modal-header"
+                sx={{ textAlign: "right", fontSize: "25px" }}
+              >
+                <IconButton>
+                  <CloseIcon
+                    color="error"
+                    onClick={handleClose}
+                    sx={{ cursor: "pointer" }}
+                  />
+                </IconButton>
+              </Box>
               <Grid container>
                 <Grid item xs={6}>
                   {loading ? (
@@ -83,32 +97,6 @@ export default function RoleInfo({ open, onClose }) {
                       New Role
                     </Typography>
                   )}
-                </Grid>
-                <Grid item={6}>
-                  <Box ml={2} sx={{ textAlign: "right" }}>
-                    {loading ? (
-                      <Box pt={1}>
-                        <Skeleton width="20vw" height="7vh">
-                          <Typography>.</Typography>
-                        </Skeleton>
-                      </Box>
-                    ) : (
-                      <TextField
-                        label="Search"
-                        size="small"
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment>
-                              <IconButton>
-                                <SearchIcon />
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                        sx={{ mt: 2, width: 280 }}
-                      />
-                    )}
-                  </Box>
                 </Grid>
               </Grid>
               <Box>
@@ -172,8 +160,8 @@ export default function RoleInfo({ open, onClose }) {
                     </Grid>
                   </Grid>
                 </Box>
-                <Box mx={1} mt={4}>
-                  <DataNewRole />
+                <Box mx={1} mt={1}>
+                  <Permissionlist />
                 </Box>
                 <Box m={1} sx={{ textAlign: "right" }}>
                   {loading ? (
@@ -207,9 +195,11 @@ export default function RoleInfo({ open, onClose }) {
 RoleInfo.defaultProps = {
   open: false,
   onClose: () => {},
+  onSuccess: () => {},
 };
 // Typechecking props of the MDAlert
 RoleInfo.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
+  onSuccess: PropTypes.func,
 };

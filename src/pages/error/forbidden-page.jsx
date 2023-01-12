@@ -2,15 +2,10 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { Box, Typography } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./index.css";
 
 export default function ForbiddenPage() {
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate("/landing");
-  };
-
   return (
     <Box className="bg_color">
       <Box className="cont_principal">
@@ -25,18 +20,6 @@ export default function ForbiddenPage() {
             This page is Forbidden.
           </Typography>
           <Stack spacing={2} direction="row" className="buttons">
-            <Button
-              onClick={goBack}
-              variant="contained"
-              sx={{
-                padding: "10px 40px",
-                borderRadius: "20px",
-                fontSize: "15px",
-                marginRight: "100px",
-              }}
-            >
-              Back
-            </Button>
             <Button
               variant="contained"
               sx={{

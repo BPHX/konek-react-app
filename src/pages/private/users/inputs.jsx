@@ -19,7 +19,7 @@ function InputRegistration() {
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 450);
   }, []);
 
   const formik = useFormik({
