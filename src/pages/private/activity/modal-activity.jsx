@@ -149,7 +149,7 @@ function ActivityModal({ open, onClose }) {
                 </Button>
                 <Button
                   variant="contained"
-                  color="secondary"
+                  color="gray"
                   sx={{ mr: 2, mt: 2, width: 80 }}
                   onClick={handleClose}
                 >

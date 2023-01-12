@@ -6,9 +6,9 @@ import { useParams } from "react-router-dom";
 import RoomLoader from "./room-loader";
 import RoomActions from "./room-actions";
 import RoomMessage from "./room-message";
-import RoomMillionaire from "../../private/dashboard/teacher/activity/activities/room-millionaire";
 import useAgora from "../../../hooks/use-agora";
 import useRoomService from "../../../hooks/use-room-service";
+import RoomMillionaire from "../../private/activity/activities/room-millionaire";
 
 export default function ConferenceSession() {
   const videoRef = React.createRef();
@@ -138,9 +138,8 @@ export default function ConferenceSession() {
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
-                  mt={9}
                   sx={{
-                    height: "80%",
+                    height: "100%",
                     borderRadius: "5px",
                   }}
                 >

@@ -22,6 +22,7 @@ import UserRegistration from "./users";
 import AuditLogs from "./logs";
 import RolesPage from "./role";
 import useMessenger from "../../hooks/use-messenger";
+import Activity from "./activity";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -58,6 +59,13 @@ const childRoutes = [
     path: "/audit",
     element: <AuditLogs />,
     name: "Audit Logs",
+    icon: BookIcon,
+    permissions: [],
+  },
+  {
+    path: "/question",
+    element: <Activity />,
+    name: "Question",
     icon: BookIcon,
     permissions: [],
   },
