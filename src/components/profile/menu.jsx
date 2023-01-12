@@ -1,20 +1,17 @@
 import { Menu, MenuItem, Typography } from "@mui/material";
 import React from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+import useMessenger from "../../hooks/use-messenger";
 
 export default function UserMenu(props) {
-  // KUNG MADAMI ANG PROPS
   const { anchor, onClose } = props;
 
   const settings = ["Profile", "Account", "Logout"];
-
-  const navigate = useNavigate();
+  const messenger = useMessenger();
 
   const handleClick = (evt) => () => {
     if (evt === "Logout") {
-      navigate("/");
-      return;
+      messenger.initLogout();
     }
     onClose();
   };
@@ -49,7 +46,7 @@ UserMenu.defaultProps = {
   anchor: null,
   onClose: () => {},
 };
-// Typechecking props of the MDAlert
+
 UserMenu.propTypes = {
   anchor: PropTypes.element,
   onClose: PropTypes.func,

@@ -21,6 +21,7 @@ import useUserService from "../../hooks/use-user-service";
 import UserRegistration from "./users";
 import AuditLogs from "./logs";
 import RolesPage from "./role";
+import useMessenger from "../../hooks/use-messenger";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -67,13 +68,6 @@ const childRoutes = [
     icon: CalendarMonthIcon,
     permissions: [],
   },
-  {
-    path: "/sign-out",
-    element: <>Sign Out</>,
-    name: "Sign Out",
-    icon: LogoutIcon,
-    permissions: [],
-  },
 ];
 
 function getPermittedRoutes(permissions) {
@@ -94,13 +88,15 @@ function PrivateLayout() {
   const userService = useUserService();
   const [permissions, setPermissions] = React.useState([]);
   const [menuLoading, setMenuLoading] = React.useState(false);
+  const messenger = useMessenger();
 
   React.useEffect(() => {
     setMenuLoading(true);
-    userService
-      .getCurrentUserPermissions()
-      .then((p) => setPermissions(p))
-      .finally(() => setMenuLoading(false));
+    if (token)
+      userService
+        .getCurrentUserPermissions()
+        .then((p) => setPermissions(p))
+        .finally(() => setMenuLoading(false));
   }, []);
 
   const [open, setOpen] = React.useState(false);
@@ -141,6 +137,10 @@ function PrivateLayout() {
     );
   }
 
+  const handleLogout = () => {
+    messenger.initLogout();
+  };
+
   return (
     <Box
       sx={{
@@ -153,14 +153,22 @@ function PrivateLayout() {
       <CssBaseline />
       <MiniAppBar open={open} onMenuClick={handleDrawerOpen} />
       <MiniDrawer open={open} onDrawerClose={handleDrawerClose}>
-        {!menuLoading && <List className="padding">{routes}</List>}
+        {!menuLoading && (
+          <List className="padding">
+            {routes}
+            <DrawerListItem
+              text="Sign Out"
+              icon={LogoutIcon}
+              open={open}
+              onClick={handleLogout}
+            />
+          </List>
+        )}
         {menuLoading && <CircularProgress color="inherit" />}
       </MiniDrawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3, width: "80%" }}>
         <DrawerHeader />
-        <div>
-          <Outlet />
-        </div>
+        <Outlet />
       </Box>
     </Box>
   );

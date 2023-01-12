@@ -16,7 +16,6 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import useRoleService from "../../../hooks/use-role-service";
 import RoleInfo from "./role-info";
-import UpdateRoleInfo from "./update-role-info";
 
 export default function RoleSearch() {
   // eslint-disable-next-line no-unused-vars
@@ -24,10 +23,8 @@ export default function RoleSearch() {
   const [loading, setLoading] = React.useState(true);
   const [role, setRole] = React.useState([]);
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const UpdateHandleClose = () => setSelected(null);
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
     {
@@ -52,20 +49,8 @@ export default function RoleSearch() {
       headerName: "Actions",
       width: 100,
       // eslint-disable-next-line react/no-unstable-nested-components
-      getActions: (params) => [
-        <GridActionsCellItem
-          icon={<EditIcon />}
-          onClick={() => setSelected(params.row)}
-          label="Update"
-        />,
-        <UpdateRoleInfo
-          open={params.id === selected?.id}
-          onClose={UpdateHandleClose}
-          selected={params.row}
-          onSuccess={() => {
-            setSelected(null);
-          }}
-        />,
+      getActions: () => [
+        <GridActionsCellItem icon={<EditIcon />} label="Update" />,
       ],
     },
   ];
@@ -107,12 +92,7 @@ export default function RoleSearch() {
             )}
           </Grid>
           <Grid item xs={4} sx={{ p: 1 }}>
-            <Button
-              variant="contained"
-              onClick={handleOpen}
-              color="success"
-              sx={{ ml: 2 }}
-            >
+            <Button variant="contained" color="success" sx={{ ml: 2 }}>
               <AddIcon sx={{ mr: 1 }} />
               Add Roles
             </Button>

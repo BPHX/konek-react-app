@@ -8,8 +8,16 @@ import {
 } from "@mui/material";
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-export default function ClassroomCard({ image, title, description, onJoin }) {
+export default function ClassroomCard({
+  image,
+  title,
+  description,
+  onJoin,
+  link,
+  linkTarget,
+}) {
   const handleJoin = () => {
     onJoin?.();
   };
@@ -34,9 +42,21 @@ export default function ClassroomCard({ image, title, description, onJoin }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={handleJoin} sx={{ marginLeft: "auto" }}>
-          Join
-        </Button>
+        {link ? (
+          <Link to={link} target={linkTarget}>
+            <Button
+              size="small"
+              onClick={handleJoin}
+              sx={{ marginLeft: "auto" }}
+            >
+              Join
+            </Button>
+          </Link>
+        ) : (
+          <Button size="small" onClick={handleJoin} sx={{ marginLeft: "auto" }}>
+            Join
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
@@ -47,11 +67,15 @@ ClassroomCard.defaultProps = {
   title: "",
   onJoin: () => {},
   image: null,
+  link: "",
+  linkTarget: "",
 };
 // Typechecking props of the MDAlert
 ClassroomCard.propTypes = {
   description: PropTypes.string,
   title: PropTypes.string,
   image: PropTypes.string,
+  link: PropTypes.string,
+  linkTarget: PropTypes.string,
   onJoin: PropTypes.func,
 };

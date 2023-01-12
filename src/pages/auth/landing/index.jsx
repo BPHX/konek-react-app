@@ -1,4 +1,13 @@
-import { Button, Typography, Box, Slide, Zoom } from "@mui/material";
+import React from "react";
+import {
+  Button,
+  Typography,
+  Box,
+  Slide,
+  Zoom,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../../components/logo/logo";
 import SignInForm from "../sign-in/form";
@@ -7,6 +16,11 @@ import "./index.css";
 function LandingPage() {
   const location = useLocation();
   const open = location.pathname === "/sign-in";
+  const [show, setShow] = React.useState(false);
+
+  React.useEffect(() => {
+    if (open && location?.state?.message) setShow(true);
+  }, [open, location.state]);
 
   return (
     <Box className="landing-page">
@@ -17,7 +31,7 @@ function LandingPage() {
       </Slide>
       <Zoom in={!open}>
         <Box className="intro">
-          <Box mb={20}>
+          <Box mb="10vw">
             <Link to="/landing">
               <Logo lg />
             </Link>
@@ -48,6 +62,20 @@ function LandingPage() {
           </Link>
         </Box>
       </Zoom>
+      <Snackbar
+        open={show}
+        onClose={() => setShow(false)}
+        autoHideDuration={6000}
+        severity="success"
+      >
+        <Alert
+          onClose={() => setShow(false)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {location?.state?.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

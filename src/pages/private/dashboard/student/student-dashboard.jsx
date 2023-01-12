@@ -1,6 +1,5 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import ClassroomCard from "../../../../components/cards/classroom-card";
 import Widget from "../../../../components/widget/widget";
 import "./index.css";
@@ -34,8 +33,6 @@ export default function StudentDashboard() {
     },
   ];
 
-  const navigate = useNavigate();
-
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={12}>
@@ -48,7 +45,8 @@ export default function StudentDashboard() {
                   image={classroom.image}
                   title={classroom.title}
                   description="You will learn how to communicate with monkey"
-                  onJoin={() => navigate(`/room/${classroom.id}`)}
+                  link={`/room/${classroom.id}`}
+                  linkTarget="_blank"
                 />
               ))}
             </div>

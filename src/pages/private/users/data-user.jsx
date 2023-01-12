@@ -28,8 +28,7 @@ export default function UserData() {
       // eslint-disable-next-line react/no-unstable-nested-components
       getActions: (params) => [
         <GridActionsCellItem
-          icon={<Switch />}
-          onClick={() => setSelected(params?.row)}
+          icon={<Switch value={params.enabled} readOnly />}
           label="Switch"
         />,
       ],
