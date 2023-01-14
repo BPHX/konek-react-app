@@ -1,4 +1,5 @@
 import React, { createContext } from "react";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import useToken from "./use-token";
 import useUserService from "./use-user-service";
@@ -10,16 +11,22 @@ export function AuthProvider({ children }) {
   const userService = useUserService();
   const [loading, setLoading] = React.useState(true);
   const [data, setData] = React.useState(null);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     if (token) {
       setLoading(true);
-      userService.getCurrentUser().then((user) =>
-        setTimeout(() => {
-          setLoading(false);
-          setData(user);
-        }, 3000)
-      );
+      userService
+        .getCurrentUser()
+        .then((user) =>
+          setTimeout(() => {
+            setLoading(false);
+            setData(user);
+          }, 3000)
+        )
+        .catch((err) => {
+          navigate("/sign-out", { state: { message: err?.response?.message } });
+        });
     } else {
       setLoading(false);
     }
