@@ -5,6 +5,7 @@ import useToken from "../../../hooks/use-token";
 function SignInPage() {
   const [token] = useToken();
   const { state } = useLocation();
+  console.log(token);
   if (token) {
     return <Navigate to="/" state={state} />;
   }
