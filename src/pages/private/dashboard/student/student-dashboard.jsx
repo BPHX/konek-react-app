@@ -15,19 +15,19 @@ export default function StudentDashboard() {
   const classrooms = [
     {
       id: "1",
-      title: "Kalbo",
+      title: "Math",
       image:
         "https://drive.google.com/uc?export=view&id=1omB8yTn99Y3mIuwREHZHjbHUAqPF9CaB",
     },
     {
       id: "2",
-      title: "Panot",
+      title: "Science",
       image:
         "https://drive.google.com/uc?export=view&id=1omB8yTn99Y3mIuwREHZHjbHUAqPF9CaB",
     },
     {
       id: "3",
-      title: "Jude",
+      title: "Filipino",
       image:
         "https://drive.google.com/uc?export=view&id=1omB8yTn99Y3mIuwREHZHjbHUAqPF9CaB",
     },
@@ -36,7 +36,7 @@ export default function StudentDashboard() {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={12}>
-        <Widget title="Live Porno" loading={loading} padded>
+        <Widget title="Classes" loading={loading} padded>
           <div className="vertical-scroll">
             <div className="card-list">
               {classrooms.map((classroom) => (

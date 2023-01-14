@@ -12,7 +12,6 @@ export default function SelectWidget(props) {
         <InputLabel>Select Widget</InputLabel>
         <Select label="Select Widget" sx={{ py: 1.5 }} {...props}>
           <MenuItem value="millionaire">Millionaire</MenuItem>
-          <MenuItem value="roll">Roll</MenuItem>
         </Select>
       </FormControl>
     </Box>

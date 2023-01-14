@@ -14,9 +14,15 @@ export default function DashboardPage() {
       </Typography>
       <AdminDashboard />
       <Box sx={{ marginTop: 2 }}>
+        <Typography variant="h5" sx={{ padding: 3, fontWeight: 600 }}>
+          Welcome student,
+        </Typography>
         <StudentDashboard />
       </Box>
       <Box sx={{ marginTop: 2 }}>
+        <Typography variant="h5" sx={{ padding: 3, fontWeight: 600 }}>
+          Welcome Teacher,
+        </Typography>
         <InstructorDashboard />
       </Box>
     </Box>
