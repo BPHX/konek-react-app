@@ -20,9 +20,6 @@ export default function ConferenceLobby() {
 
   React.useEffect(() => {
     video?.play?.(ref.current);
-    return () => {
-      console.log("-----------------------------Unmounting");
-    };
   }, [video, ref]);
 
   return (
