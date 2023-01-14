@@ -12,9 +12,6 @@ export default function RoomLoader() {
         height: "100%",
         justifyContent: "center",
         alignItems: "center",
-        position: "absolute",
-        top: 0,
-        left: 0,
         backgroundColor: "#202124",
         zIndex: 999,
       }}

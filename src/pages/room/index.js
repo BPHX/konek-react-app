@@ -1,16 +1,13 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import ConferenceSession from "./session";
+import ConferenceSession from "./call-session";
 import ConferenceLobby from "./lobby";
 import { AuthProvider } from "../../hooks/use-auth";
-import { AgoraProvider } from "../../hooks/use-agora";
 
 function PageLayout() {
   return (
     <AuthProvider>
-      <AgoraProvider>
-        <Outlet />
-      </AgoraProvider>
+      <Outlet />
     </AuthProvider>
   );
 }
