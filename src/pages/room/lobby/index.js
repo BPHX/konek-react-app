@@ -1,17 +1,26 @@
 import React from "react";
 import { Box, Paper, Grid, Typography, Button } from "@mui/material";
+import AgoraRTC from "agora-rtc-sdk-ng";
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../../components/logo/logo";
 import ParticipantInfo from "./participant-info";
 import useAuth from "../../../hooks/use-auth";
-import useAgora from "../../../hooks/use-agora";
 
 export default function ConferenceLobby() {
   const location = useLocation();
   const [loading, auth] = useAuth();
-  const [agoraLoading] = useAgora();
+  const [video, setVideo] = React.useState(null);
+  const ref = React.createRef(null);
 
-  const disabledAction = loading || agoraLoading;
+  const disabledAction = loading;
+
+  React.useEffect(() => {
+    AgoraRTC.createCameraVideoTrack().then((v) => setVideo(v));
+  }, []);
+
+  React.useEffect(() => {
+    video?.play?.(ref.current);
+  }, [video, ref]);
 
   return (
     <Box
@@ -86,6 +95,7 @@ export default function ConferenceLobby() {
               >
                 <Typography>Video Preview</Typography>
                 <Box
+                  ref={ref}
                   sx={{
                     backgroundColor: "black",
                     width: "300px",
