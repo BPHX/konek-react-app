@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import React from "react";
 import Box from "@mui/material/Box";
 import MicIcon from "@mui/icons-material/Mic";
 import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
 import CallEndIcon from "@mui/icons-material/CallEnd";
 import { Grid, IconButton } from "@mui/material";
-import PropTypes from "prop-types";
 import MicOffIcon from "@mui/icons-material/MicOff";
 import VideocamOffOutlinedIcon from "@mui/icons-material/VideocamOffOutlined";
 import MessageIcon from "@mui/icons-material/Message";
@@ -12,30 +13,33 @@ import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import VideogameAssetOffIcon from "@mui/icons-material/VideogameAssetOff";
 import { useTheme } from "@mui/material/styles";
+import {
+  LocalUserContext,
+  RtcContext,
+  muteAudio,
+  muteVideo,
+  PropsContext,
+} from "agora-react-uikit";
+import { useNavigate } from "react-router-dom";
 
-export default function RoomActions({
-  audioEnabled,
-  onAudioToggle,
-  onEnd,
-  videoEnabled,
-  onVideoToggle,
-  messageEnabled,
-  onMessageToggle,
-  millionaireEnabled,
-  onMillionaireToggle,
-}) {
+export default function RoomActions() {
+  const { dispatch, localAudioTrack } = React.useContext(RtcContext);
+  const local = React.useContext(LocalUserContext);
+  const { callbacks } = React.useContext(PropsContext);
   const theme = useTheme();
 
-  const handleMuteToggle = () => {
-    onAudioToggle?.(!audioEnabled);
-  };
+  const navigate = useNavigate();
 
-  const handleEnd = () => {
-    onEnd?.();
+  const handleMuteToggle = () => {
+    if (localAudioTrack) muteAudio(local, dispatch, localAudioTrack, callbacks);
   };
 
   const handleVideo = () => {
-    onVideoToggle?.(!videoEnabled);
+    if (localVideoTrack) muteVideo(local, dispatch, localVideoTrack, callbacks);
+  };
+
+  const handleEnd = () => {
+    navigate("/");
   };
 
   const handleMessage = () => {
@@ -67,7 +71,7 @@ export default function RoomActions({
               color: theme.palette.white.main,
             }}
           >
-            {audioEnabled ? <MicIcon /> : <MicOffIcon />}
+            {local?.hasAudio === 1 ? <MicIcon /> : <MicOffIcon />}
           </IconButton>
         </Box>
         <Box px={2}>
@@ -76,7 +80,7 @@ export default function RoomActions({
             size="large"
             sx={{ color: theme.palette.white.main }}
           >
-            {videoEnabled ? (
+            {local.hasVideo === 1 ? (
               <VideocamOutlinedIcon />
             ) : (
               <VideocamOffOutlinedIcon />
@@ -124,27 +128,3 @@ export default function RoomActions({
     </Grid>
   );
 }
-
-RoomActions.defaultProps = {
-  audioEnabled: false,
-  videoEnabled: false,
-  messageEnabled: false,
-  onAudioToggle: () => {},
-  onEnd: () => {},
-  onVideoToggle: () => {},
-  onMessageToggle: () => {},
-  millionaireEnabled: () => {},
-  onMillionaireToggle: () => {},
-};
-// Typechecking props of the MDAlert
-RoomActions.propTypes = {
-  audioEnabled: PropTypes.bool,
-  videoEnabled: PropTypes.bool,
-  messageEnabled: PropTypes.bool,
-  onAudioToggle: PropTypes.func,
-  onEnd: PropTypes.func,
-  onVideoToggle: PropTypes.func,
-  onMessageToggle: PropTypes.func,
-  millionaireEnabled: PropTypes.func,
-  onMillionaireToggle: PropTypes.func,
-};

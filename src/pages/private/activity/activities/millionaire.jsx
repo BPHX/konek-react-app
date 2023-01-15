@@ -31,14 +31,18 @@ export default function Millionaire({
       {/* <form id="join-form" autoComplete="off" onSubmit={formik?.handleSubmit}> */}
       <Paper elevation={1} sx={{ marginBottom: 1 }}>
         <Box p={1} pb={0}>
-          Question #1
-          <IconButton onClick={() => onDelete?.(item)}>
-            <DeleteIcon
-              color="error"
-              disabled={allowDelete}
-              sx={{ cursor: "pointer" }}
-            />
-          </IconButton>
+          <Box sx={{ bgcolor: "primary.main", borderRadius: "5px" }}>
+            <Typography color="white.darker" ml={2}>
+              Question #
+              <IconButton onClick={() => onDelete?.(item)}>
+                <DeleteIcon
+                  color="error"
+                  disabled={allowDelete}
+                  sx={{ cursor: "pointer" }}
+                />
+              </IconButton>
+            </Typography>
+          </Box>
         </Box>
         <Box mt={1} p={2} pt={0}>
           <TextField

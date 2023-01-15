@@ -10,6 +10,7 @@ import {
 import { Box, List, Paper } from "@mui/material";
 import styles from "./agora-styles.css";
 import UserContainer from "./user-container";
+import RoomActions from "./call-actions";
 
 export default function AgoraPinnedView() {
   const { styleProps, rtcProps } = useContext(PropsContext);
@@ -83,6 +84,9 @@ export default function AgoraPinnedView() {
         mx={1}
       >
         <MaxVideoView user={maxUsers[0]} />
+        <Box position="absolute" width="100%" bottom={0} left={0}>
+          <RoomActions />
+        </Box>
       </Box>
     </Box>
   );
