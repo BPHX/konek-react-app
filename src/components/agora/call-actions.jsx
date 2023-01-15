@@ -80,7 +80,7 @@ export default function RoomActions() {
             size="large"
             sx={{ color: theme.palette.white.main }}
           >
-            {local.hasVideo === 1 ? (
+            {local?.hasVideo === 1 ? (
               <VideocamOutlinedIcon />
             ) : (
               <VideocamOffOutlinedIcon />
