@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 import React from "react";
 import Box from "@mui/material/Box";
 import MicIcon from "@mui/icons-material/Mic";
