@@ -11,16 +11,42 @@ import {
   Skeleton,
   Switch,
 } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import EditIcon from "@mui/icons-material/Edit";
 import useUserService from "../../../hooks/use-user-service";
+import useUserForm from "../../../hooks/use-user-form";
 
 export default function UserData() {
-  // eslint-disable-next-line no-unused-vars
-  const [selected, setSelected] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const [search, setSearch] = React.useState("");
   const [users, setUsers] = React.useState([]);
+  const [userForm] = useUserForm();
+
+  const userService = useUserService();
+
+  const handleSearch = () => {
+    userService
+      .getUsers(search)
+      .then((u) => setUsers(u))
+      .finally(() => setLoading(false));
+  };
+
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
+    {
+      field: "actions",
+      headerName: "Action",
+      width: 130,
+      type: "actions",
+      // eslint-disable-next-line react/no-unstable-nested-components
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<EditIcon />}
+          label="Update"
+          onClick={() => userForm.update(params?.row, handleSearch)}
+        />,
+      ],
+    },
     {
       field: "active",
       headerName: "Active",
@@ -37,16 +63,8 @@ export default function UserData() {
     { field: "email", headerName: "Email", width: 200 },
     { field: "firstname", headerName: "First name", width: 200 },
     { field: "lastname", headerName: "Last name", width: 200 },
+    { field: "gender", headerName: "Gender", width: 200 },
   ];
-
-  const userService = useUserService();
-
-  const handleSearch = () => {
-    userService
-      .getUsers(search)
-      .then((u) => setUsers(u))
-      .finally(() => setLoading(false));
-  };
 
   const handleSearchChange = (evt) => {
     setSearch(evt.target.value);
@@ -73,17 +91,28 @@ export default function UserData() {
                 </Skeleton>
               </Box>
             ) : (
-              <Typography
-                variant="h5"
-                sx={{ paddingTop: 2, paddingLeft: 3, fontWeight: 600 }}
-              >
-                User Information
-              </Typography>
+              <Box sx={{ display: "flex", flexDirection: "row" }}>
+                <Typography
+                  variant="h5"
+                  sx={{ paddingTop: 1.5, paddingLeft: 3, fontWeight: 600 }}
+                >
+                  User Information
+                </Typography>
+                <Box>
+                  <IconButton
+                    variant="contained"
+                    color="success"
+                    onClick={() => userForm.add(handleSearch)}
+                  >
+                    <AddCircleIcon sx={{ fontSize: "40px" }} />
+                  </IconButton>
+                </Box>
+              </Box>
             )}
           </Grid>
           <Grid item xs={6} sx={{ textAlign: "right" }}>
             {loading ? (
-              <Box pl={3} ml={12}>
+              <Box ml={50}>
                 <Skeleton width="250px" height="7vh">
                   <Typography>.</Typography>
                 </Skeleton>
@@ -135,7 +164,6 @@ export default function UserData() {
               columns={columns}
               pageSize={10}
               rowsPerPageOptions={[5]}
-              // checkboxSelection
             />
           )}
         </div>

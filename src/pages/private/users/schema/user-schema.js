@@ -1,20 +1,22 @@
 import { string, object, date } from "yup";
 
 const UserSchema = object().shape({
-  lastName: string().required("Required"),
-  firstName: string().required("Required"),
-  middleName: string().required("Required"),
+  username: string().required("Required"),
+  lastname: string().required("Required"),
+  firstname: string().required("Required"),
+  middlename: string().required("Required"),
   email: string().required("Required"),
-  birthday: date(),
-  suffix: string().required("Required"),
+  gender: string().required("Required"),
+  dob: date(),
 });
 
 export const initialUser = {
-  lastName: "",
-  firstName: "",
-  middleName: "",
+  username: "",
+  lastname: "",
+  firstname: "",
+  middlename: "",
+  gender: "",
   email: "",
-  birthday: new Date(),
-  suffix: "",
+  dob: new Date(),
 };
 export default UserSchema;

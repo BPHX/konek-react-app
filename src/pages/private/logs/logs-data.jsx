@@ -59,7 +59,7 @@ export default function LogsData() {
           </Grid>
           <Grid item xs={6} sx={{ textAlign: "right" }}>
             {loading ? (
-              <Box pl={3} ml={12}>
+              <Box ml={50}>
                 <Skeleton width="250px" height="7vh">
                   <Typography>.</Typography>
                 </Skeleton>

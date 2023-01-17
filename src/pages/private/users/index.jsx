@@ -1,22 +1,19 @@
 import React from "react";
 import { Card, Grid } from "@mui/material";
-import InputRegistration from "./inputs";
-import DataTable from "./data-user";
+import UserData from "./data-user";
+import { UserFormProvider } from "../../../hooks/use-user-form";
 
 function UserRegistration() {
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={5}>
-        <Card>
-          <InputRegistration />
-        </Card>
+    <UserFormProvider>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Card>
+            <UserData />
+          </Card>
+        </Grid>
       </Grid>
-      <Grid item xs={7}>
-        <Card>
-          <DataTable />
-        </Card>
-      </Grid>
-    </Grid>
+    </UserFormProvider>
   );
 }
 export default UserRegistration;

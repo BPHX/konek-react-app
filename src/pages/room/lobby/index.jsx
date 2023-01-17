@@ -1,16 +1,41 @@
 import React from "react";
-import { Box, Paper, Grid, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Paper,
+  Grid,
+  Typography,
+  Button,
+  IconButton,
+} from "@mui/material";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import { Link, useLocation } from "react-router-dom";
+import MicOffIcon from "@mui/icons-material/MicOff";
+import MicIcon from "@mui/icons-material/Mic";
+import VideocamOutlinedIcon from "@mui/icons-material/VideocamOutlined";
+import VideocamOffOutlinedIcon from "@mui/icons-material/VideocamOffOutlined";
+import {
+  LocalUserContext,
+  muteAudio,
+  muteVideo,
+  PropsContext,
+  RtcContext,
+} from "agora-react-uikit";
+import { useTheme } from "@emotion/react";
 import Logo from "../../../components/logo/logo";
 import ParticipantInfo from "./participant-info";
 import useAuth from "../../../hooks/use-auth";
+import AestheticLobby from "./aesthetic-lobby";
 
 export default function ConferenceLobby() {
+  const { dispatch, localAudioTrack, localVideoTrack } =
+    React.useContext(RtcContext);
+  const local = React.useContext(LocalUserContext);
+  const { callbacks } = React.useContext(PropsContext);
   const location = useLocation();
   const [loading, auth] = useAuth();
   const [video, setVideo] = React.useState(null);
   const ref = React.createRef(null);
+  const theme = useTheme();
 
   const disabledAction = loading;
 
@@ -21,6 +46,14 @@ export default function ConferenceLobby() {
   React.useEffect(() => {
     video?.play?.(ref.current);
   }, [video, ref]);
+
+  const handleMuteToggle = () => {
+    if (localAudioTrack) muteAudio(local, dispatch, localAudioTrack, callbacks);
+  };
+
+  const handleVideo = () => {
+    if (localVideoTrack) muteVideo(local, dispatch, localVideoTrack, callbacks);
+  };
 
   return (
     <Box
@@ -33,6 +66,9 @@ export default function ConferenceLobby() {
         alignItems: "center",
       }}
     >
+      <Box>
+        <AestheticLobby />
+      </Box>
       <Paper
         sx={{
           width: "90vw",
@@ -93,7 +129,7 @@ export default function ConferenceLobby() {
                   flexDirection: "column",
                 }}
               >
-                <Typography>Video Preview</Typography>
+                <Typography mb={2}>Video Preview</Typography>
                 <Box
                   ref={ref}
                   sx={{
@@ -102,8 +138,29 @@ export default function ConferenceLobby() {
                     height: "180px",
                   }}
                 />
-                <Typography my={2}>Live controls here</Typography>
-                <Typography>Volume Adjustments here</Typography>
+                <Box my={2}>
+                  <IconButton
+                    onClick={handleMuteToggle}
+                    size="large"
+                    sx={{
+                      color: theme.palette.primary.main,
+                    }}
+                  >
+                    {local?.hasAudio === 1 ? <MicIcon /> : <MicOffIcon />}
+                  </IconButton>
+                  <IconButton
+                    onClick={handleVideo}
+                    size="large"
+                    sx={{ color: theme.palette.primary.main }}
+                  >
+                    {local?.hasVideo === 1 ? (
+                      <VideocamOutlinedIcon />
+                    ) : (
+                      <VideocamOffOutlinedIcon />
+                    )}
+                  </IconButton>
+                </Box>
+                {/* <Typography>Volume Adjustments here</Typography> */}
               </Box>
             </Grid>
           </Grid>
@@ -112,7 +169,9 @@ export default function ConferenceLobby() {
           <Grid container sx={{ height: "100%" }}>
             <Grid item xs={6} />
             <Grid item xs={6} sx={{ textAlign: "right" }}>
-              <Button variant="text">Exit</Button>
+              <Button variant="text" sx={{ marginRight: 1 }}>
+                Exit
+              </Button>
               {disabledAction && (
                 <Button variant="contained" sx={{ width: 100 }} disabled>
                   Join

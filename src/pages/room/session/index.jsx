@@ -4,11 +4,11 @@ import React from "react";
 import { useTheme } from "@mui/material/styles";
 import { useParams } from "react-router-dom";
 import RoomLoader from "./room-loader";
-import RoomActions from "./room-actions";
 import RoomMessage from "./room-message";
 import useAgora from "../../../hooks/use-agora";
 import useRoomService from "../../../hooks/use-room-service";
 import RoomMillionaire from "../../private/activity/activities/room-millionaire";
+import RoomActions from "../../../components/agora/call-actions";
 
 export default function ConferenceSession() {
   const videoRef = React.createRef();
