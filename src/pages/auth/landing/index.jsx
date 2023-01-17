@@ -55,7 +55,7 @@ function LandingPage() {
             what they have have learned with regards to their lesson in a form
             of enjoyable interactive games
           </Typography>
-          <Link to="/sign-in">
+          <Link to="/sign-in" state={{ from: "/landing" }}>
             <Button variant="outlined" className="btn">
               KONEK
             </Button>

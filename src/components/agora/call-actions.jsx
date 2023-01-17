@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 import React from "react";
 import Box from "@mui/material/Box";
 import MicIcon from "@mui/icons-material/Mic";
@@ -14,19 +12,24 @@ import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import VideogameAssetOffIcon from "@mui/icons-material/VideogameAssetOff";
 import { useTheme } from "@mui/material/styles";
 import {
-  LocalUserContext,
   RtcContext,
   muteAudio,
   muteVideo,
   PropsContext,
 } from "agora-react-uikit";
 import { useNavigate } from "react-router-dom";
+import useChat from "../../hooks/use-chat";
+import { LocalUserContext } from "./local-user-context";
+import useMessenger from "../../hooks/use-messenger";
 
 export default function RoomActions() {
-  const { dispatch, localAudioTrack } = React.useContext(RtcContext);
+  const { dispatch, localAudioTrack, localVideoTrack } =
+    React.useContext(RtcContext);
   const local = React.useContext(LocalUserContext);
   const { callbacks } = React.useContext(PropsContext);
+  const [chat, chatService] = useChat();
   const theme = useTheme();
+  const messenger = useMessenger();
 
   const navigate = useNavigate();
 
@@ -39,15 +42,21 @@ export default function RoomActions() {
   };
 
   const handleEnd = () => {
-    navigate("/");
+    messenger.sendConfirm({
+      title: "Exit Call",
+      message: "Are you sure you want to exit from the call?",
+      onConfirm: () => {
+        navigate("/");
+      },
+    });
   };
 
   const handleMessage = () => {
-    onMessageToggle?.(!messageEnabled);
+    chatService.setVisible(!chat?.visible);
   };
 
   const handleGame = () => {
-    onMillionaireToggle?.(!millionaireEnabled);
+    // onMillionaireToggle?.(!millionaireEnabled);
   };
   return (
     <Grid sx={{ display: "flex", flexDirection: "column", flexGrow: 2 }}>
@@ -108,7 +117,7 @@ export default function RoomActions() {
             size="large"
             sx={{ color: theme.palette.white.main }}
           >
-            {messageEnabled ? <MessageIcon /> : <ChatBubbleIcon />}
+            {chat?.visible ? <MessageIcon /> : <ChatBubbleIcon />}
           </IconButton>
         </Box>
         <Box sx={{ position: "absolute", left: 10 }}>
@@ -117,11 +126,7 @@ export default function RoomActions() {
             size="large"
             sx={{ color: theme.palette.white.main }}
           >
-            {millionaireEnabled ? (
-              <VideogameAssetIcon />
-            ) : (
-              <VideogameAssetOffIcon />
-            )}
+            {true ? <VideogameAssetIcon /> : <VideogameAssetOffIcon />}
           </IconButton>
         </Box>
       </Box>

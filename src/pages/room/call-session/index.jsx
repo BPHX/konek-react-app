@@ -3,10 +3,11 @@ import React from "react";
 import { Box, useTheme, Button } from "@mui/material";
 import Chatbox from "./chatbox";
 import Video from "./video";
+import useChat, { withChat } from "../../../hooks/use-chat";
 
-export default function Session() {
-  const [chatVisible, setChatVisible] = React.useState(true);
+function Session() {
   const theme = useTheme();
+  const [chatState] = useChat();
   const smoothTransition = {
     transition: theme.transitions.create("all", {
       easing: theme.transitions.easing.sharp,
@@ -26,7 +27,7 @@ export default function Session() {
         position="absolute"
         height="100vh"
         width={{
-          md: chatVisible ? "calc(100% - 400px)" : "100%",
+          md: chatState?.visible ? "calc(100% - 400px)" : "100%",
           xs: "100%",
         }}
         top={0}
@@ -42,7 +43,7 @@ export default function Session() {
         style={smoothTransition}
         position="absolute"
         height="100vh"
-        width={chatVisible ? "400px" : "0"}
+        width={chatState?.visible ? "400px" : "0"}
         overflow="hidden"
         top={0}
         right={0}
@@ -55,3 +56,5 @@ export default function Session() {
     </Box>
   );
 }
+
+export default withChat(Session);

@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import useConfig from "./use-config";
 import useAuth from "./use-auth";
 import useMessenger from "./use-messenger";
+import { ChatProvider } from "./use-chat";
 
 const AgoraContext = createContext(null);
 
@@ -48,7 +49,9 @@ export function AgoraProvider({ children }) {
   }, [loading, engine]);
 
   return (
-    <AgoraContext.Provider value={value}>{children}</AgoraContext.Provider>
+    <AgoraContext.Provider value={value}>
+      <ChatProvider>{children}</ChatProvider>
+    </AgoraContext.Provider>
   );
 }
 

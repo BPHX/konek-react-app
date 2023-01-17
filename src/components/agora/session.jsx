@@ -13,6 +13,7 @@ import {
 } from "agora-react-uikit";
 import AgoraPinnedView from "./pinned-view";
 import AgoraGridView from "./grid-view";
+import { LocalUserProvider } from "./local-user-context";
 
 export default function AgoraSession(props) {
   const { rtcProps } = props;
@@ -29,23 +30,33 @@ export default function AgoraSession(props) {
   );
 }
 
-function VideoCall() {
+function VideoCall({ ...props }) {
   const { rtcProps } = React.useContext(PropsContext);
   return (
     <RtcConfigure callActive={rtcProps.callActive}>
       <LocalUserContext>
-        <RtmConfigure>
-          {rtcProps.disableRtm ? (
-            <>
-              {rtcProps?.layout === 1 ? <AgoraGridView /> : <AgoraPinnedView />}
-            </>
-          ) : (
-            <RtmConfigure>
-              <RemoteMutePopUp />
-              {rtcProps?.layout === 1 ? <AgoraGridView /> : <AgoraPinnedView />}
-            </RtmConfigure>
-          )}
-        </RtmConfigure>
+        <LocalUserProvider>
+          <RtmConfigure>
+            {rtcProps.disableRtm ? (
+              <>
+                {rtcProps?.layout === 1 ? (
+                  <AgoraGridView />
+                ) : (
+                  <AgoraPinnedView />
+                )}
+              </>
+            ) : (
+              <RtmConfigure>
+                <RemoteMutePopUp />
+                {rtcProps?.layout === 1 ? (
+                  <AgoraGridView />
+                ) : (
+                  <AgoraPinnedView />
+                )}
+              </RtmConfigure>
+            )}
+          </RtmConfigure>
+        </LocalUserProvider>
       </LocalUserContext>
     </RtcConfigure>
   );

@@ -35,14 +35,22 @@ export default function Video() {
 
   const rtcProps = {
     appId: agoraAppId,
-    // uid: access.uuid,
+    uid: access.uuid,
     channel: access.channel, // your agora channel
     token: access.token,
   };
 
+  const rtmProps = {
+    uid: access.uuid,
+  };
+
   return (
     <Card sx={{ height: "100%", position: "relative", bgcolor: "#000" }}>
-      <AgoraSession rtcProps={rtcProps} callbacks={callbacks} />
+      <AgoraSession
+        rtcProps={rtcProps}
+        rtmProps={rtmProps}
+        callbacks={callbacks}
+      />
     </Card>
   );
 }
