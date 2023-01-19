@@ -77,8 +77,6 @@ export default function RoleInfo({
     formik.setFieldValue("permissions", permissions.filter(Boolean));
   };
 
-  console.log(formik.errors);
-
   return (
     <Modal
       keepMounted
