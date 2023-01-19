@@ -57,8 +57,14 @@ function InputRegistration({
   });
 
   React.useEffect(() => {
-    formik?.setValues(user || {});
+    if (!user) {
+      formik.resetForm();
+      formik?.setValues({ gender: "M" });
+    } else {
+      formik?.setValues({ ...user, gender: user.gender || "M" });
+    }
   }, [user]);
+
   return (
     <Modal
       keepMounted
@@ -119,6 +125,24 @@ function InputRegistration({
                       helperText={
                         formik.touched.username && formik.errors.username
                       }
+                      variant="standard"
+                      sx={{ pr: 4 }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6} pt={3}>
+                    <TextField
+                      id="outlined-basic"
+                      label="Email (Required)"
+                      name="email"
+                      fullWidth
+                      disabled={loading}
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBLur}
+                      error={
+                        formik.touched.email && Boolean(formik.errors.email)
+                      }
+                      helperText={formik.touched.email && formik.errors.email}
                       variant="standard"
                       sx={{ pr: 4 }}
                     />
@@ -187,24 +211,6 @@ function InputRegistration({
                     />
                   </Grid>
                   <Grid item xs={12} md={6} pt={3}>
-                    <TextField
-                      id="outlined-basic"
-                      label="Email (Required)"
-                      name="email"
-                      fullWidth
-                      disabled={loading}
-                      value={formik.values.email}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBLur}
-                      error={
-                        formik.touched.email && Boolean(formik.errors.email)
-                      }
-                      helperText={formik.touched.email && formik.errors.email}
-                      variant="standard"
-                      sx={{ pr: 4 }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6} pt={3}>
                     <TextFieldDatePicker
                       name="dob"
                       disabled={loading}
@@ -243,12 +249,18 @@ function InputRegistration({
                         variant="standard"
                         sx={{ pr: 5.5 }}
                       >
-                        <MenuItem value="M">M</MenuItem>
-                        <MenuItem value="F">F</MenuItem>
+                        <MenuItem value="M">Male</MenuItem>
+                        <MenuItem value="F">Female</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
-                  <Grid item xs={12} md={6} pt={3}>
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    pt={3}
+                    display={{ xs: "none", md: "block" }}
+                  >
                     <Aesthetic gender={formik?.values?.gender} />
                   </Grid>
                 </Grid>

@@ -16,6 +16,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import useUserService from "../../../hooks/use-user-service";
 import useUserForm from "../../../hooks/use-user-form";
 
+const GENDER = {
+  M: "Male",
+  F: "Female",
+};
+
 export default function UserData() {
   const [loading, setLoading] = React.useState(true);
   const [search, setSearch] = React.useState("");
@@ -63,7 +68,12 @@ export default function UserData() {
     { field: "email", headerName: "Email", width: 200 },
     { field: "firstname", headerName: "First name", width: 200 },
     { field: "lastname", headerName: "Last name", width: 200 },
-    { field: "gender", headerName: "Gender", width: 200 },
+    {
+      field: "gender",
+      headerName: "Gender",
+      valueGetter: (p) => GENDER[p.value] || GENDER.M,
+      width: 200,
+    },
   ];
 
   const handleSearchChange = (evt) => {

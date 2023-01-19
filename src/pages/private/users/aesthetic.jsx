@@ -6,9 +6,9 @@ import ImagUserBoy from "./img/image-profile.png";
 import ImagUserGirl from "./img/image-profile-girl.png";
 import "./css/index.css";
 
-function Aesthetic({ gender }) {
+function Aesthetic({ gender, ...rest }) {
   return (
-    <Box className="pop-up">
+    <Box className="pop-up" {...rest}>
       <CardMedia
         component="img"
         height="250"
