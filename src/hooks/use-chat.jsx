@@ -36,13 +36,13 @@ export function ChatProvider({ children }) {
   const [state, dispatch] = React.useReducer(chatReducer, initialState);
   const value = React.useMemo(() => {
     function updateMessages(messages) {
-      dispatch({ type: ChatAction.ADD_MESSAGE, payload: messages || [] });
+      dispatch({ type: ChatAction.MESSAGES, payload: messages || [] });
     }
 
     function addMessage(message) {
       const messages = state?.messages || [];
       messages.push(message);
-      dispatch({ type: ChatAction.ADD_MESSAGE, payload: messages });
+      dispatch({ type: ChatAction.MESSAGES, payload: messages });
     }
 
     function setVisible(visible) {

@@ -10,7 +10,7 @@ export default function DashboardPage() {
   return (
     <Box>
       <Typography variant="h5" sx={{ padding: 3, fontWeight: 600 }}>
-        Welcome {user.firstname},
+        Welcome {user.firstname} {user.lastname},
       </Typography>
       <AdminDashboard />
       <Box sx={{ marginTop: 2 }}>

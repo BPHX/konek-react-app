@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import { Box, List, CircularProgress } from "@mui/material";
+import { Box, List } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
@@ -9,7 +9,6 @@ import SecurityIcon from "@mui/icons-material/Security";
 import QuizIcon from "@mui/icons-material/Quiz";
 import BookIcon from "@mui/icons-material/Book";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import LogoutIcon from "@mui/icons-material/Logout";
 import AppLoader from "../../components/loader/app-loader";
 import useAuth, { withAuth } from "../../hooks/use-auth";
 import useToken, { SESSION_TOKEN_KEY, withToken } from "../../hooks/use-token";
@@ -21,7 +20,6 @@ import useUserService from "../../hooks/use-user-service";
 import UserRegistration from "./users";
 import AuditLogs from "./logs";
 import RolesPage from "./role";
-import useMessenger from "../../hooks/use-messenger";
 import Activity from "./activity";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -46,28 +44,28 @@ const childRoutes = [
     element: <UserRegistration />,
     name: "Users",
     icon: GroupIcon,
-    permissions: [],
+    permissions: ["user:create"],
   },
   {
     path: "/roles",
     element: <RolesPage />,
     name: "Roles",
     icon: SecurityIcon,
-    permissions: [],
+    permissions: ["role:create"],
   },
   {
     path: "/audit",
     element: <AuditLogs />,
     name: "Audit Logs",
     icon: BookIcon,
-    permissions: [],
+    permissions: ["audit:view"],
   },
   {
     path: "/question",
     element: <Activity />,
     name: "Question",
     icon: QuizIcon,
-    permissions: [],
+    permissions: ["activity:create"],
   },
   {
     path: "/calendar",
@@ -96,7 +94,6 @@ function PrivateLayout() {
   const userService = useUserService();
   const [permissions, setPermissions] = React.useState([]);
   const [menuLoading, setMenuLoading] = React.useState(false);
-  const messenger = useMessenger();
 
   React.useEffect(() => {
     setMenuLoading(true);
@@ -108,9 +105,11 @@ function PrivateLayout() {
   }, []);
 
   const [open, setOpen] = React.useState(false);
-  const routes = React.useMemo(
-    () =>
-      getPermittedRoutes(permissions).map((route, index) => (
+  const [allowed, drawer] = React.useMemo(() => {
+    const pRoutes = getPermittedRoutes(permissions);
+    return [
+      !!pRoutes.find((route) => route.path === location.pathname),
+      pRoutes.map((route, index) => (
         <DrawerListItem
           key={route?.path || route?.name || index}
           text={route.name}
@@ -120,8 +119,8 @@ function PrivateLayout() {
           onClick={() => navigate(route.path)}
         />
       )),
-    [permissions, location, open]
-  );
+    ];
+  }, [permissions, location, open]);
 
   const handleDrawerOpen = (b) => {
     setOpen(b);
@@ -133,7 +132,7 @@ function PrivateLayout() {
 
   if (!token) return <Navigate to="/landing" />;
 
-  if (loading) return <AppLoader />;
+  if (loading || menuLoading) return <AppLoader />;
 
   if (token && !user) {
     localStorage.removeItem(SESSION_TOKEN_KEY);
@@ -145,9 +144,14 @@ function PrivateLayout() {
     );
   }
 
-  const handleLogout = () => {
-    messenger.initLogout();
-  };
+  if (!allowed) {
+    return (
+      <Navigate
+        to="/403"
+        state={{ message: "User Not Allowed to access this page" }}
+      />
+    );
+  }
 
   return (
     <Box
@@ -161,18 +165,15 @@ function PrivateLayout() {
       <CssBaseline />
       <MiniAppBar open={open} onMenuClick={handleDrawerOpen} />
       <MiniDrawer open={open} onDrawerClose={handleDrawerClose}>
-        {!menuLoading && (
-          <List className="padding">
-            {routes}
-            <DrawerListItem
-              text="Sign Out"
-              icon={LogoutIcon}
-              open={open}
-              onClick={handleLogout}
-            />
-          </List>
-        )}
-        {menuLoading && <CircularProgress color="inherit" />}
+        <List className="padding">
+          {drawer}
+          {/* <DrawerListItem
+            text="Sign Out"
+            icon={LogoutIcon}
+            open={open}
+            onClick={handleLogout}
+          /> */}
+        </List>
       </MiniDrawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3, width: "80%" }}>
         <DrawerHeader />
