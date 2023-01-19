@@ -16,6 +16,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
 import Permissionlist from "./permission-list";
 import RoleSchema, { initialRole } from "./schema/role-schema";
+import useRoleService from "../../../hooks/use-role-service";
 
 export default function RoleInfo({
   open,
@@ -27,15 +28,10 @@ export default function RoleInfo({
 }) {
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+  const service = useRoleService();
   const handleClose = () => {
     onClose?.();
   };
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
 
   const formik = useFormik({
     initialValues: role || initialRole,
@@ -60,12 +56,28 @@ export default function RoleInfo({
   });
 
   React.useEffect(() => {
-    if (!role) {
+    if (!role?.id) {
       formik.resetForm();
+      setLoading(false);
     } else {
-      formik?.setValues({ ...(role || {}) });
+      setLoading(true);
+      service
+        .getRolePermissions(role.id)
+        .then((p) => {
+          formik?.setValues({
+            ...(role || {}),
+            permissions: p.filter(Boolean),
+          });
+        })
+        .finally(() => setLoading(false));
     }
   }, [role]);
+
+  const handlePermmissionChange = (permissions) => {
+    formik.setFieldValue("permissions", permissions.filter(Boolean));
+  };
+
+  console.log(formik.errors);
 
   return (
     <Modal
@@ -133,13 +145,13 @@ export default function RoleInfo({
                           name="name"
                           fullWidth
                           disabled={loading}
-                          value={formik.values.role}
+                          value={formik.values.name}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBLur}
                           error={
-                            formik.touched.role && Boolean(formik.errors.role)
+                            formik.touched.name && Boolean(formik.errors.name)
                           }
-                          helpertext={formik.touched.role && formik.errors.role}
+                          helpertext={formik.touched.name && formik.errors.name}
                           variant="standard"
                           sx={{ pr: 4 }}
                         />
@@ -178,7 +190,10 @@ export default function RoleInfo({
                   </Grid>
                 </Box>
                 <Box mx={1} mt={1}>
-                  <Permissionlist />
+                  <Permissionlist
+                    value={formik.values.permissions}
+                    onChange={handlePermmissionChange}
+                  />
                 </Box>
                 {error}
                 <Box m={1} sx={{ textAlign: "right" }}>

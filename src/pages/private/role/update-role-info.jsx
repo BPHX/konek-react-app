@@ -6,7 +6,7 @@ import {
   Typography,
   Skeleton,
   IconButton,
-  InputAdornment position="start",
+  InputAdornment,
   Modal,
   Card,
 } from "@mui/material";
@@ -103,7 +103,7 @@ export default function UpdateRoleInfo({ open, onClose }) {
                               <IconButton>
                                 <SearchIcon />
                               </IconButton>
-                            </InputAdornment position="start">
+                            </InputAdornment>
                           ),
                         }}
                         sx={{ mt: 2, width: 280 }}

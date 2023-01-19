@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
+import PropTypes from "prop-types";
 import {
   Box,
   Switch,
@@ -11,12 +13,19 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import useRoleService from "../../../hooks/use-role-service";
 
-export default function Permissionlist() {
-  // eslint-disable-next-line no-unused-vars
-  const [selected, setSelected] = React.useState(null);
+export default function PermissionList({ value, onChange }) {
   const [loading, setLoading] = React.useState(true);
   const [search, setSearch] = React.useState("");
   const [permissions, setPermissions] = React.useState([]);
+
+  const handleChange = (id) => (evt) => {
+    const val = evt?.target?.checked;
+    if (val) {
+      onChange?.([...value, id]);
+    } else {
+      onChange?.(value.filter((x) => x !== id));
+    }
+  };
 
   const columns = [
     { field: "id", headerName: "Permission", width: 250 },
@@ -27,13 +36,17 @@ export default function Permissionlist() {
       width: 130,
       type: "actions",
       // eslint-disable-next-line react/no-unstable-nested-components
-      getActions: (params) => [
-        <GridActionsCellItem
-          icon={<Switch />}
-          onClick={() => setSelected(params?.row)}
-          label="Switch"
-        />,
-      ],
+      getActions: (params) => {
+        const result = value.indexOf(params.id) > -1;
+        return [
+          <GridActionsCellItem
+            icon={
+              <Switch checked={result} onChange={handleChange(params.id)} />
+            }
+            label="Switch"
+          />,
+        ];
+      },
     },
   ];
 
@@ -90,3 +103,13 @@ export default function Permissionlist() {
     </Box>
   );
 }
+
+PermissionList.defaultProps = {
+  value: [],
+  onChange: () => {},
+};
+
+PermissionList.propTypes = {
+  value: PropTypes.arrayOf(PropTypes.string),
+  onChange: PropTypes.func,
+};
