@@ -53,7 +53,6 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
   React.useEffect(() => {
     if (!user) {
       formik.resetForm();
-      formik?.setValues({ gender: "M" });
     } else {
       formik?.setValues({ ...user, gender: user.gender || "M" });
     }
