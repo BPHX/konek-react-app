@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import InputRegistration from "../pages/private/users/modal-inputs";
+import InputRegistration from "../pages/private/users/modal/user-modal";
 import useConfig from "./use-config";
 import useToken from "./use-token";
 

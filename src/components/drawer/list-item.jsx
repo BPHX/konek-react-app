@@ -71,7 +71,7 @@ DrawerListItem.defaultProps = {
 DrawerListItem.propTypes = {
   open: PropTypes.bool,
   text: PropTypes.string,
-  icon: PropTypes.element,
+  icon: PropTypes.node,
   onClick: PropTypes.func,
   selected: PropTypes.bool,
   hideBorderTop: PropTypes.bool,

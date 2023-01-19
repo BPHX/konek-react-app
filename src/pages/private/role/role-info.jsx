@@ -122,7 +122,7 @@ export default function RoleInfo({ open, onClose, onSuccess }) {
                           error={
                             formik.touched.role && Boolean(formik.errors.role)
                           }
-                          helperText={formik.touched.role && formik.errors.role}
+                          helpertext={formik.touched.role && formik.errors.role}
                           variant="standard"
                           sx={{ pr: 4 }}
                         />
@@ -148,7 +148,7 @@ export default function RoleInfo({ open, onClose, onSuccess }) {
                             formik.touched.description &&
                             Boolean(formik.errors.description)
                           }
-                          helperText={
+                          helpertext={
                             formik.touched.description &&
                             formik.errors.description
                           }

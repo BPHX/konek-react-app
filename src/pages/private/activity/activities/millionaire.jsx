@@ -55,7 +55,7 @@ export default function Millionaire({
             // onChange={formik.handleChange}
             // onBlur={formik.handleBLur}
             // error={formik.touched.question && Boolean(formik.errors.question)}
-            // helperText={formik.touched.question && formik.errors.question}
+            // helpertext={formik.touched.question && formik.errors.question}
             sx={{ width: "100%" }}
             autoFocus={autoFocus}
           />
@@ -82,7 +82,7 @@ export default function Millionaire({
                     // error={
                     //   formik.touched.answerA && Boolean(formik.errors.answerA)
                     // }
-                    // helperText={
+                    // helpertext={
                     //   formik.touched.answerA && formik.errors.answerA
                     // }
                     sx={{ width: "70%" }}
@@ -103,7 +103,7 @@ export default function Millionaire({
                     // error={
                     //   formik.touched.answerB && Boolean(formik.errors.answerB)
                     // }
-                    // helperText={
+                    // helpertext={
                     //   formik.touched.answerB && formik.errors.answerB
                     // }
                     sx={{ width: "70%" }}
@@ -124,7 +124,7 @@ export default function Millionaire({
                     // error={
                     //   formik.touched.answerC && Boolean(formik.errors.answerC)
                     // }
-                    // helperText={
+                    // helpertext={
                     //   formik.touched.answerC && formik.errors.answerC
                     // }
                     sx={{ width: "70%" }}
@@ -145,7 +145,7 @@ export default function Millionaire({
                     // error={
                     //   formik.touched.answerD && Boolean(formik.errors.answerD)
                     // }
-                    // helperText={
+                    // helpertext={
                     //   formik.touched.answerD && formik.errors.answerD
                     // }
                     sx={{ width: "70%" }}

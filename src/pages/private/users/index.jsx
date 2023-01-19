@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Grid } from "@mui/material";
-import UserData from "./data-user";
+import UserListing from "./listing/user-listing";
 import { UserFormProvider } from "../../../hooks/use-user-form";
 
 function UserRegistration() {
@@ -9,7 +9,7 @@ function UserRegistration() {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Card>
-            <UserData />
+            <UserListing />
           </Card>
         </Grid>
       </Grid>

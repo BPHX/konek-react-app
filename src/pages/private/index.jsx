@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
@@ -115,7 +114,7 @@ function PrivateLayout() {
         <DrawerListItem
           key={route?.path || route?.name || index}
           text={route.name}
-          icon={route.icon}
+          icon={route?.icon}
           selected={location.pathname === route.path}
           open={open}
           onClick={() => navigate(route.path)}

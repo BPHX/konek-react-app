@@ -129,7 +129,7 @@ export default function RoleSearch() {
                 label="Search"
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment>
+                    <InputAdornment position="start">
                       <IconButton onClick={handleSearch}>
                         <SearchIcon />
                       </IconButton>

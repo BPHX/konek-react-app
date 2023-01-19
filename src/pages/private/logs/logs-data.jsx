@@ -70,7 +70,7 @@ export default function LogsData() {
                 label="Search"
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment>
+                    <InputAdornment position="start">
                       <IconButton>
                         <SearchIcon />
                       </IconButton>
@@ -108,8 +108,7 @@ export default function LogsData() {
               rows={rows}
               columns={columns}
               pageSize={10}
-              rowsPerPageOptions={[5]}
-              // checkboxSelection
+              rowsPerPageOptions={[10]}
             />
           )}
         </div>

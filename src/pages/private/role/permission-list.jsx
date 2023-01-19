@@ -65,7 +65,7 @@ export default function Permissionlist() {
             label="Search"
             InputProps={{
               endAdornment: (
-                <InputAdornment>
+                <InputAdornment position="start">
                   <IconButton onClick={handleSearch}>
                     <SearchIcon />
                   </IconButton>
@@ -83,7 +83,7 @@ export default function Permissionlist() {
           rows={permissions}
           columns={columns}
           pageSize={10}
-          rowsPerPageOptions={[5]}
+          rowsPerPageOptions={[10]}
           loading={loading}
         />
       </div>

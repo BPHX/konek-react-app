@@ -6,7 +6,7 @@ import {
   Typography,
   Skeleton,
   IconButton,
-  InputAdornment,
+  InputAdornment position="start",
   Modal,
   Card,
 } from "@mui/material";
@@ -99,11 +99,11 @@ export default function UpdateRoleInfo({ open, onClose }) {
                         size="small"
                         InputProps={{
                           endAdornment: (
-                            <InputAdornment>
+                            <InputAdornment position="start">
                               <IconButton>
                                 <SearchIcon />
                               </IconButton>
-                            </InputAdornment>
+                            </InputAdornment position="start">
                           ),
                         }}
                         sx={{ mt: 2, width: 280 }}
@@ -135,7 +135,7 @@ export default function UpdateRoleInfo({ open, onClose }) {
                           error={
                             formik.touched.role && Boolean(formik.errors.role)
                           }
-                          helperText={formik.touched.role && formik.errors.role}
+                          helpertext={formik.touched.role && formik.errors.role}
                           variant="standard"
                           sx={{ pr: 4 }}
                         />
@@ -161,7 +161,7 @@ export default function UpdateRoleInfo({ open, onClose }) {
                             formik.touched.description &&
                             Boolean(formik.errors.description)
                           }
-                          helperText={
+                          helpertext={
                             formik.touched.description &&
                             formik.errors.description
                           }
