@@ -165,15 +165,7 @@ function PrivateLayout() {
       <CssBaseline />
       <MiniAppBar open={open} onMenuClick={handleDrawerOpen} />
       <MiniDrawer open={open} onDrawerClose={handleDrawerClose}>
-        <List className="padding">
-          {drawer}
-          {/* <DrawerListItem
-            text="Sign Out"
-            icon={LogoutIcon}
-            open={open}
-            onClick={handleLogout}
-          /> */}
-        </List>
+        <List className="padding">{drawer}</List>
       </MiniDrawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3, width: "80%" }}>
         <DrawerHeader />

@@ -16,10 +16,17 @@ import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
 import Permissionlist from "./permission-list";
 import RoleSchema, { initialRole } from "./schema/role-schema";
-import authRoutes from "../../auth";
 
-export default function RoleInfo({ open, onClose, onSuccess }) {
-  const [loading, setLoading] = React.useState(true);
+export default function RoleInfo({
+  open,
+  onClose,
+  role,
+  onSubmit,
+  onSuccess,
+  acceptText,
+}) {
+  const [error, setError] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   const handleClose = () => {
     onClose?.();
   };
@@ -31,21 +38,35 @@ export default function RoleInfo({ open, onClose, onSuccess }) {
   }, []);
 
   const formik = useFormik({
-    initialValues: initialRole,
+    initialValues: role || initialRole,
 
     validationSchema: RoleSchema,
     onSubmit: () => {
+      setError("");
       setLoading(true);
-      authRoutes
+      onSubmit?.({ ...role, ...formik?.values })
         .then(() => {
+          formik?.resetForm();
+          onClose?.();
           onSuccess?.();
         })
-        .catch(() => {})
+        .catch((err) => {
+          setError(err?.message);
+        })
         .finally(() => {
           setLoading(false);
         });
     },
   });
+
+  React.useEffect(() => {
+    if (!role) {
+      formik.resetForm();
+    } else {
+      formik?.setValues({ ...(role || {}) });
+    }
+  }, [role]);
+
   return (
     <Modal
       keepMounted
@@ -73,12 +94,8 @@ export default function RoleInfo({ open, onClose, onSuccess }) {
                 className="modal-header"
                 sx={{ textAlign: "right", fontSize: "25px" }}
               >
-                <IconButton>
-                  <CloseIcon
-                    color="error"
-                    onClick={handleClose}
-                    sx={{ cursor: "pointer" }}
-                  />
+                <IconButton onClick={handleClose}>
+                  <CloseIcon color="error" sx={{ cursor: "pointer" }} />
                 </IconButton>
               </Box>
               <Grid container>
@@ -113,7 +130,7 @@ export default function RoleInfo({ open, onClose, onSuccess }) {
                         <TextField
                           id="outlined-basic"
                           label="Role"
-                          name="role"
+                          name="name"
                           fullWidth
                           disabled={loading}
                           value={formik.values.role}
@@ -163,6 +180,7 @@ export default function RoleInfo({ open, onClose, onSuccess }) {
                 <Box mx={1} mt={1}>
                   <Permissionlist />
                 </Box>
+                {error}
                 <Box m={1} sx={{ textAlign: "right" }}>
                   {loading ? (
                     <Box
@@ -179,7 +197,8 @@ export default function RoleInfo({ open, onClose, onSuccess }) {
                     </Box>
                   ) : (
                     <Button variant="contained" color="primary" type="submit">
-                      <SaveIcon sx={{ marginRight: 1 }} /> Save
+                      <SaveIcon sx={{ marginRight: 1 }} />{" "}
+                      {acceptText || "Save"}
                     </Button>
                   )}
                 </Box>
@@ -196,10 +215,17 @@ RoleInfo.defaultProps = {
   open: false,
   onClose: () => {},
   onSuccess: () => {},
+  onSubmit: () => {},
+  role: null,
+  acceptText: "",
 };
-// Typechecking props of the MDAlert
+
 RoleInfo.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
   onSuccess: PropTypes.func,
+  onSubmit: PropTypes.func,
+  acceptText: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  role: PropTypes.object,
 };

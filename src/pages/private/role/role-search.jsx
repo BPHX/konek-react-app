@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
+import useRoleForm from "../../../hooks/use-role-form";
 import useRoleService from "../../../hooks/use-role-service";
-import RoleInfo from "./role-info";
 
 export default function RoleSearch() {
   // eslint-disable-next-line no-unused-vars
@@ -22,12 +22,34 @@ export default function RoleSearch() {
   const [loading, setLoading] = React.useState(true);
   const [search, setSearch] = React.useState("");
   const [role, setRole] = React.useState([]);
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [useRole] = useRoleForm();
+
+  const roleService = useRoleService();
+
+  const handleSearch = () => {
+    setLoading(true);
+    roleService
+      .getRoles(search)
+      .then((r) => setRole(r))
+      .finally(() => setLoading(false));
+  };
 
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
+    {
+      field: "actions",
+      headerName: "Action",
+      width: 130,
+      type: "actions",
+      // eslint-disable-next-line react/no-unstable-nested-components
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<EditIcon />}
+          label="Update"
+          onClick={() => useRole.update(params?.row, handleSearch)}
+        />,
+      ],
+    },
     {
       field: "active",
       headerName: "Active",
@@ -44,27 +66,7 @@ export default function RoleSearch() {
     },
     { field: "name", headerName: "Name", width: 250 },
     { field: "description", headerName: "Description", width: 220 },
-    {
-      field: "actions",
-      type: "actions",
-      headerName: "Actions",
-      width: 100,
-      // eslint-disable-next-line react/no-unstable-nested-components
-      getActions: () => [
-        <GridActionsCellItem icon={<EditIcon />} label="Update" />,
-      ],
-    },
   ];
-
-  const userRole = useRoleService();
-
-  const handleSearch = () => {
-    setLoading(true);
-    userRole
-      .getRoles(search)
-      .then((r) => setRole(r))
-      .finally(() => setLoading(false));
-  };
 
   const handleSearchChange = (evt) => {
     setSearch(evt.target.value);
@@ -81,14 +83,6 @@ export default function RoleSearch() {
       borderColor="primary.main"
       height="85vh"
     >
-      <RoleInfo
-        open={open}
-        onClose={handleClose}
-        onSuccess={() => {
-          setOpen(false);
-          handleSearch();
-        }}
-      />
       <Box mx={1}>
         <Grid container>
           <Grid item xs={6}>
@@ -109,7 +103,7 @@ export default function RoleSearch() {
                 <IconButton
                   variant="contained"
                   color="success"
-                  onClick={handleOpen}
+                  onClick={() => useRole.add(handleSearch)}
                 >
                   <AddCircleIcon sx={{ fontSize: "40px" }} />
                 </IconButton>

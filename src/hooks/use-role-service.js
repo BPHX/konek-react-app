@@ -7,7 +7,7 @@ export default function useRoleService() {
   const config = useConfig();
   const [token] = useToken();
 
-  const roleService = React.useMemo(() => {
+  const service = React.useMemo(() => {
     const client = axios.create({
       baseURL: config.apiUrl,
       headers: {
@@ -36,5 +36,5 @@ export default function useRoleService() {
     };
   }, [config]);
 
-  return roleService;
+  return service;
 }
