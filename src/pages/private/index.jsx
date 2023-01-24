@@ -21,6 +21,8 @@ import UserRegistration from "./users";
 import AuditLogs from "./logs";
 import RolesPage from "./role";
 import Activity from "./activity";
+import Calendar from "./calendar";
+import Attendance from "./attendance";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -69,8 +71,15 @@ const childRoutes = [
   },
   {
     path: "/calendar",
-    element: <>My Calendar</>,
+    element: <Calendar />,
     name: "My Calendar",
+    icon: CalendarMonthIcon,
+    permissions: [],
+  },
+  {
+    path: "/attendance",
+    element: <Attendance />,
+    name: "Attendance",
     icon: CalendarMonthIcon,
     permissions: [],
   },

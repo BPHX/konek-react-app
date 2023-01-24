@@ -1,0 +1,42 @@
+.App {
+    text-align: center;
+}
+
+.datepickers {
+    text-align: center;
+    width: 20vw;
+    margin: 15px auto;
+}
+
+.title {
+    margin-right: 10px;
+    padding: 8px;
+    font-size: 15px;
+}
+
+.start {
+    margin-right: 10px;
+    padding: 8px;
+}
+
+.end {
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 8px;
+}
+
+.btn {
+    margin-right: 10px;
+    margin-top: 8px;
+    background-color: green;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    font-weight: 600;
+    color: #fff;
+}
