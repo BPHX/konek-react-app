@@ -13,10 +13,10 @@ import {
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
-import useUserService from "../../../../hooks/use-user-service";
-import useUserForm from "../../../../hooks/use-user-form";
+import useUserForm from "../../../../hooks/user/use-user-form";
 import RoleDisplay from "./role-display";
 import TableSkeleton from "./table-skeleton";
+import useUserService from "../../../../hooks/user/use-user-service";
 
 const GENDER = {
   M: "Male",

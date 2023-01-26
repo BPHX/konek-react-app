@@ -11,7 +11,7 @@ import {
   IconButton,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import useRoleService from "../../../hooks/use-role-service";
+import useRoleService from "../../../hooks/role/use-role-service";
 
 export default function PermissionList({ value, onChange }) {
   const [loading, setLoading] = React.useState(true);

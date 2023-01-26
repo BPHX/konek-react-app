@@ -15,9 +15,9 @@ import {
   CardContent,
   CircularProgress,
 } from "@mui/material";
-import useChat from "../../../hooks/use-chat";
+import useChat from "../../../hooks/room/use-chat";
 import ChatMessages from "./chat-messages";
-import useAuth from "../../../hooks/use-auth";
+import useAuth from "../../../hooks/auth/use-auth";
 import RoomGame from "./game";
 
 export default function Chatbox() {

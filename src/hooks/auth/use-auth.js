@@ -2,7 +2,7 @@ import React, { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import useToken from "./use-token";
-import useUserService from "./use-user-service";
+import useUserService from "../user/use-user-service";
 
 const AuthContext = createContext(null);
 

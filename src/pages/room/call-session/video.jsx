@@ -4,7 +4,7 @@ import { Card } from "@mui/material";
 import { useParams } from "react-router-dom";
 import AgoraSession from "../../../components/agora/session";
 import useConfig from "../../../hooks/use-config";
-import useRoomService from "../../../hooks/use-room-service";
+import useRoomService from "../../../hooks/room/use-room-service";
 import RoomLoader from "./loader";
 
 export default function Video() {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import useToken from "../../../hooks/use-token";
+import useToken from "../../../hooks/auth/use-token";
 
 function SignInPage() {
   const [token] = useToken();

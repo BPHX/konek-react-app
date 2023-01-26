@@ -8,7 +8,7 @@ import {
   Typography,
   ListItemText,
 } from "@mui/material";
-import useChat from "../../../hooks/use-chat";
+import useChat from "../../../hooks/room/use-chat";
 
 export default function ChatMessages() {
   const [chat] = useChat();

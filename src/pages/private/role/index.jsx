@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Grid } from "@mui/material";
 import Roles from "./role-search";
-import { RoleFormProvider } from "../../../hooks/use-role-form";
+import { RoleFormProvider } from "../../../hooks/role/use-role-form";
 
 function RolesPage() {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import useGame from "../../hooks/use-game";
+import useGame from "../../hooks/room/use-game";
 import RoomMillionaire from "./types/room-millionaire";
 
 function ActivityBoard() {

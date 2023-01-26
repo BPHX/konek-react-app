@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import Logo from "../../../components/logo/logo";
 import LoginSchema, { initialLog } from "./schema";
-import useSignIn from "../../../hooks/use-signin";
+import useSignIn from "../../../hooks/auth/use-signin";
 
 function SignInForm() {
   const navigate = useNavigate();

@@ -4,10 +4,10 @@ import AgoraRTC from "agora-rtc-sdk-ng";
 
 // import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
-import useConfig from "./use-config";
-import useAuth from "./use-auth";
-import useMessenger from "./use-messenger";
 import { ChatProvider } from "./use-chat";
+import useConfig from "../use-config";
+import useAuth from "../auth/use-auth";
+import useMessenger from "../use-messenger";
 
 const AgoraContext = createContext(null);
 

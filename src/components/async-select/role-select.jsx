@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import useRoleService from "../../hooks/use-role-service";
+import useRoleService from "../../hooks/role/use-role-service";
 
 function RoleSelect() {
   const service = useRoleService();

@@ -16,7 +16,7 @@ import {
   PropsContext,
 } from "agora-react-uikit";
 import { useNavigate } from "react-router-dom";
-import useChat from "../../hooks/use-chat";
+import useChat from "../../hooks/room/use-chat";
 import { LocalUserContext } from "./local-user-context";
 import useMessenger from "../../hooks/use-messenger";
 

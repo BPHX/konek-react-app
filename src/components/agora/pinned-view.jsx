@@ -12,7 +12,7 @@ import styles from "./agora-styles.css";
 import UserContainer from "./user-container";
 import RoomActions from "./call-actions";
 import RoomMillionaire from "../activity/types/room-millionaire";
-import useGame from "../../hooks/use-game";
+import useGame from "../../hooks/room/use-game";
 import ActivityBoard from "../activity/activity-board";
 
 export default function AgoraPinnedView() {

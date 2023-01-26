@@ -16,7 +16,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import PropTypes from "prop-types";
 import Permissionlist from "./permission-list";
 import RoleSchema, { initialRole } from "./schema/role-schema";
-import useRoleService from "../../../hooks/use-role-service";
+import useRoleService from "../../../hooks/role/use-role-service";
 
 export default function RoleInfo({
   open,

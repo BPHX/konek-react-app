@@ -5,7 +5,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useTheme } from "@mui/material/styles";
 import { Box, IconButton } from "@mui/material";
-import useGame from "../../../hooks/use-game";
+import useGame from "../../../hooks/room/use-game";
 
 export default function RoomGame() {
   const [game, service] = useGame();

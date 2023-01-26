@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import EditIcon from "@mui/icons-material/Edit";
-import useRoleForm from "../../../hooks/use-role-form";
-import useRoleService from "../../../hooks/use-role-service";
+import useRoleForm from "../../../hooks/role/use-role-form";
+import useRoleService from "../../../hooks/role/use-role-service";
 
 export default function RoleSearch() {
   // eslint-disable-next-line no-unused-vars

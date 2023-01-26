@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
-import { Box, useTheme, Button } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import Chatbox from "./chatbox";
 import Video from "./video";
-import useChat, { withChat } from "../../../hooks/use-chat";
-import { withGame } from "../../../hooks/use-game";
+import { withGame } from "../../../hooks/room/use-game";
+import useChat, { withChat } from "../../../hooks/room/use-chat";
 
 function Session() {
   const theme = useTheme();

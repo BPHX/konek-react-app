@@ -23,8 +23,8 @@ import {
 import { useTheme } from "@emotion/react";
 import Logo from "../../../components/logo/logo";
 import ParticipantInfo from "./participant-info";
-import useAuth from "../../../hooks/use-auth";
 import AestheticLobby from "./aesthetic-lobby";
+import useAuth from "../../../hooks/auth/use-auth";
 
 export default function ConferenceLobby() {
   const { dispatch, localAudioTrack, localVideoTrack } =

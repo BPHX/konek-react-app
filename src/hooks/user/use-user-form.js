@@ -1,9 +1,7 @@
 import React from "react";
-import axios from "axios";
 import PropTypes from "prop-types";
-import InputRegistration from "../pages/private/users/modal/user-modal";
-import useConfig from "./use-config";
-import useToken from "./use-token";
+import InputRegistration from "../../components/modal/user-modal/user-modal";
+import useUserService from "./use-user-service";
 
 export const UserFormContext = React.createContext([]);
 
@@ -12,8 +10,7 @@ export function UserFormProvider({ children }) {
   const [user, setUser] = React.useState(null);
   const [type, setType] = React.useState("add");
   const [callback, setCallback] = React.useState(null);
-  const config = useConfig();
-  const [token] = useToken();
+  const service = useUserService();
 
   const value = React.useMemo(() => {
     function add(c) {
@@ -35,23 +32,6 @@ export function UserFormProvider({ children }) {
       },
     ];
   }, []);
-
-  const service = React.useMemo(() => {
-    const client = axios.create({
-      baseURL: config.apiUrl,
-      headers: {
-        authorization: token,
-      },
-    });
-    function createUser(u) {
-      return client.post(`/user/`, u).then(({ data }) => data);
-    }
-
-    function updateUser(u) {
-      return client.put(`/user/${u?.id}`, u).then(({ data }) => data);
-    }
-    return { createUser, updateUser };
-  }, [token, config]);
 
   return (
     <UserFormContext.Provider value={value}>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Grid } from "@mui/material";
 import UserListing from "./listing/user-listing";
-import { UserFormProvider } from "../../../hooks/use-user-form";
+import { UserFormProvider } from "../../../hooks/user/use-user-form";
 
 function UserRegistration() {
   return (

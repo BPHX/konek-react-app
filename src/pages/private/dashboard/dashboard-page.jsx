@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import useAuth from "../../../hooks/use-auth";
+import useAuth from "../../../hooks/auth/use-auth";
 import AdminDashboard from "./admin/admin-dashboard";
 import StudentDashboard from "./student/student-dashboard";
 import InstructorDashboard from "./teacher/teacher-dashboard";

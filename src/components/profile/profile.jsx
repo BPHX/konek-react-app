@@ -3,7 +3,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { Avatar, Tooltip } from "@mui/material";
 import "./profile.css";
 import UserMenu from "./menu";
-import useAuth from "../../hooks/use-auth";
+import useAuth from "../../hooks/auth/use-auth";
 
 export default function Profile() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);

@@ -2,7 +2,7 @@
 import axios from "axios";
 import md5 from "md5";
 import React from "react";
-import useConfig from "./use-config";
+import useConfig from "../use-config";
 import { SESSION_TOKEN_KEY } from "./use-token";
 
 export default function useSignIn() {

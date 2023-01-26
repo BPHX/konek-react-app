@@ -2,7 +2,7 @@
 import React, { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import RoleInfo from "../pages/private/role/role-info";
+import RoleInfo from "../../pages/private/role/role-info";
 
 const MessengerContext = createContext(null);
 
@@ -36,7 +36,7 @@ MessengerProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default function useMessenger() {
+export default function usePermissionForm() {
   const context = React.useContext(MessengerContext);
   if (!context)
     throw new Error(

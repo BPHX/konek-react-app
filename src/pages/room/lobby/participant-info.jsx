@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { CircularProgress, Typography, TextField, Box } from "@mui/material";
-import useToken from "../../../hooks/use-token";
+import useToken from "../../../hooks/auth/use-token";
 
 export default function ParticipantInfo({ user, loading }) {
   const token = useToken();

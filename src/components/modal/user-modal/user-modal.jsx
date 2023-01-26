@@ -17,7 +17,7 @@ import { useFormik } from "formik";
 import React from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
-import TextFieldDatePicker from "../../../../components/date-picker/date-picker";
+import TextFieldDatePicker from "../../date-picker/date-picker";
 import UserSchema, { initialUser } from "./user-schema";
 import Aesthetic from "./aesthetic";
 
@@ -30,7 +30,6 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
 
   const formik = useFormik({
     initialValues: user || initialUser,
-
     validationSchema: UserSchema,
     onSubmit: () => {
       setError("");
