@@ -18,6 +18,7 @@ import {
 import useChat from "../../../hooks/use-chat";
 import ChatMessages from "./chat-messages";
 import useAuth from "../../../hooks/use-auth";
+import RoomGame from "./game";
 
 export default function Chatbox() {
   const [chatState, { setVisible, addMessage }] = useChat();
@@ -87,7 +88,7 @@ export default function Chatbox() {
           boxSizing="border-box"
           px={2}
         >
-          Toolbox Here
+          <RoomGame />
         </Box>
         <Divider sx={{ height: 5, width: "100%" }} />
         <Box

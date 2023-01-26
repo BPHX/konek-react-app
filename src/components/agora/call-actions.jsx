@@ -1,4 +1,3 @@
-/* eslint-disable no-constant-condition */
 import React from "react";
 import Box from "@mui/material/Box";
 import MicIcon from "@mui/icons-material/Mic";
@@ -9,8 +8,6 @@ import MicOffIcon from "@mui/icons-material/MicOff";
 import VideocamOffOutlinedIcon from "@mui/icons-material/VideocamOffOutlined";
 import MessageIcon from "@mui/icons-material/Message";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
-import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
-import VideogameAssetOffIcon from "@mui/icons-material/VideogameAssetOff";
 import { useTheme } from "@mui/material/styles";
 import {
   RtcContext,
@@ -56,9 +53,6 @@ export default function RoomActions() {
     chatService.setVisible(!chat?.visible);
   };
 
-  const handleGame = () => {
-    // onMillionaireToggle?.(!millionaireEnabled);
-  };
   return (
     <Grid sx={{ display: "flex", flexDirection: "column", flexGrow: 2 }}>
       <Box
@@ -119,15 +113,6 @@ export default function RoomActions() {
             sx={{ color: theme.palette.white.main }}
           >
             {chat?.visible ? <MessageIcon /> : <ChatBubbleIcon />}
-          </IconButton>
-        </Box>
-        <Box sx={{ position: "absolute", left: 10 }}>
-          <IconButton
-            onClick={handleGame}
-            size="large"
-            sx={{ color: theme.palette.white.main }}
-          >
-            {true ? <VideogameAssetIcon /> : <VideogameAssetOffIcon />}
           </IconButton>
         </Box>
       </Box>

@@ -1,0 +1,31 @@
+.room-answer.selected{
+  border-color: green;
+}
+
+.room-answer.selected.highlight{
+  background-color: red;
+  border-color: #eee;
+}
+
+.room-answer.highlight.correct{
+  background-color: green;
+}
+
+.million {
+  animation: opacity .50s;
+}
+
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
+
+
+
+

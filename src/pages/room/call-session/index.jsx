@@ -4,6 +4,7 @@ import { Box, useTheme, Button } from "@mui/material";
 import Chatbox from "./chatbox";
 import Video from "./video";
 import useChat, { withChat } from "../../../hooks/use-chat";
+import { withGame } from "../../../hooks/use-game";
 
 function Session() {
   const theme = useTheme();
@@ -57,4 +58,4 @@ function Session() {
   );
 }
 
-export default withChat(Session);
+export default withChat(withGame(Session));

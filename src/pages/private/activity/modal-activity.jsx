@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 import SelectWidget from "./select-widget";
 import "./index.css";
-import Millionaire from "./activities/millionaire";
+import Millionaire from "../../../components/activity/types/millionaire";
 
 function ActivityModal({ open, onClose }) {
   // const [loading, setLoading] = React.useState(true);

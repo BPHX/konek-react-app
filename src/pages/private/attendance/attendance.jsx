@@ -36,6 +36,11 @@ const days = {
   23: { id: 23, name: "Wednesday" },
   24: { id: 24, name: "Thursday" },
   25: { id: 25, name: "Friday" },
+  26: { id: 26, name: "Monday" },
+  27: { id: 27, name: "Tuesday" },
+  28: { id: 28, name: "Wednesday" },
+  29: { id: 29, name: "Thursday" },
+  30: { id: 30, name: "Friday" },
 };
 
 function AttendanceSheet() {
@@ -43,10 +48,10 @@ function AttendanceSheet() {
   const [currentPage, setCurrentPage] = React.useState(1);
   const numberOfDaysPerPage = 10;
 
-  const handleChange = (studentId, dayId) => (event) => {
+  const handleChange = (studentId, dayId) => (evt) => {
     setAttendance({
       ...attendance,
-      [studentId]: { ...attendance[studentId], [dayId]: event.target.checked },
+      [studentId]: { ...attendance[studentId], [dayId]: evt.target.checked },
     });
   };
 
@@ -60,9 +65,17 @@ function AttendanceSheet() {
   );
 
   return (
-    <Grid container spacing={2}>
+    <Grid
+      container
+      spacing={2}
+      border={4}
+      borderLeft={0}
+      borderRight={0}
+      borderColor="primary.main"
+      mt={0}
+    >
       <Grid item xs={12}>
-        <Typography variant="h4" sx={{ padding: 3, fontWeight: 600 }}>
+        <Typography variant="h5" sx={{ px: 2, fontWeight: 600, pb: 2 }}>
           Attendance Sheet
         </Typography>
         <table>
@@ -94,6 +107,7 @@ function AttendanceSheet() {
           </tbody>
         </table>
         <Pagination
+          sx={{ mt: 2 }}
           count={Math.ceil(Object.values(days).length / numberOfDaysPerPage)}
           page={currentPage}
           onChange={handlePageChange}

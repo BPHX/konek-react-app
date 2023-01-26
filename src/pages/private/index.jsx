@@ -5,6 +5,7 @@ import { Box, List } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
+import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import SecurityIcon from "@mui/icons-material/Security";
 import QuizIcon from "@mui/icons-material/Quiz";
 import BookIcon from "@mui/icons-material/Book";
@@ -80,7 +81,7 @@ const childRoutes = [
     path: "/attendance",
     element: <Attendance />,
     name: "Attendance",
-    icon: CalendarMonthIcon,
+    icon: FolderOpenIcon,
     permissions: [],
   },
 ];

@@ -4,7 +4,7 @@ import LogsData from "./logs-data";
 
 export default function AuditLogs() {
   return (
-    <Grid item xs={5}>
+    <Grid item xs={12} md={6}>
       <Card>
         <LogsData />
       </Card>

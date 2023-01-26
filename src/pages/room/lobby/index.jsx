@@ -160,7 +160,6 @@ export default function ConferenceLobby() {
                     )}
                   </IconButton>
                 </Box>
-                {/* <Typography>Volume Adjustments here</Typography> */}
               </Box>
             </Grid>
           </Grid>

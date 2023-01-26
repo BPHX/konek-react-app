@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "@mui/material";
 import AddActivity from "./add-activity";
 
-function Activity() {
+export default function Activity() {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -11,5 +11,3 @@ function Activity() {
     </Grid>
   );
 }
-
-export default Activity;

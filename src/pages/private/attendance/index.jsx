@@ -1,13 +1,13 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Card, Grid } from "@mui/material";
 import AttendanceSheet from "./attendance";
 
 function Attendance() {
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
+    <Grid item xs={12}>
+      <Card>
         <AttendanceSheet />
-      </Grid>
+      </Card>
     </Grid>
   );
 }

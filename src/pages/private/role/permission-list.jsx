@@ -71,26 +71,6 @@ export default function PermissionList({ value, onChange }) {
 
   return (
     <Box>
-      <Grid container>
-        <Grid item xs={12} sx={{ textAlign: "right" }}>
-          <TextField
-            size="small"
-            label="Search"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <IconButton onClick={handleSearch}>
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            sx={{ m: 1 }}
-            onChange={handleSearchChange}
-            value={search}
-          />
-        </Grid>
-      </Grid>
       <div style={{ height: 400, width: "80vw" }}>
         <DataGrid
           rows={permissions}

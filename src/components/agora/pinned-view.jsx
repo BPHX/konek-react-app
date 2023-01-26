@@ -11,6 +11,9 @@ import { Box, List, Paper } from "@mui/material";
 import styles from "./agora-styles.css";
 import UserContainer from "./user-container";
 import RoomActions from "./call-actions";
+import RoomMillionaire from "../activity/types/room-millionaire";
+import useGame from "../../hooks/use-game";
+import ActivityBoard from "../activity/activity-board";
 
 export default function AgoraPinnedView() {
   const { styleProps, rtcProps } = useContext(PropsContext);
@@ -44,6 +47,8 @@ export default function AgoraPinnedView() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const [game, service] = useGame();
 
   return (
     <Box
@@ -87,6 +92,7 @@ export default function AgoraPinnedView() {
         <Box position="absolute" width="100%" bottom={0} left={0}>
           <RoomActions />
         </Box>
+        {game.visible && <ActivityBoard />}
       </Box>
     </Box>
   );
