@@ -61,7 +61,7 @@ export default function UserListing({ data, loading, onEdit }) {
       field: "roles",
       headerName: "Roles",
       renderCell: (p) => <RoleDisplay value={p.value} />,
-      width: 200,
+      flex: 1,
     },
   ];
   if (loading) return <TableSkeleton />;
