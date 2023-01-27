@@ -53,7 +53,7 @@ export default function Millionaire({
             name="question"
             // value={formik.values.question}
             // onChange={formik.handleChange}
-            // onBlur={formik.handleBLur}
+            // onBlur={formik.handleBlur}
             // error={formik.touched.question && Boolean(formik.errors.question)}
             // helpertext={formik.touched.question && formik.errors.question}
             sx={{ width: "100%" }}
@@ -78,7 +78,7 @@ export default function Millionaire({
                     name="answerA"
                     // value={formik.values.answerA}
                     // onChange={formik.handleChange}
-                    // onBlur={formik.handleBLur}
+                    // onBlur={formik.handleBlur}
                     // error={
                     //   formik.touched.answerA && Boolean(formik.errors.answerA)
                     // }
@@ -99,7 +99,7 @@ export default function Millionaire({
                     name="answerB"
                     // value={formik.values.answerB}
                     // onChange={formik.handleChange}
-                    // onBlur={formik.handleBLur}
+                    // onBlur={formik.handleBlur}
                     // error={
                     //   formik.touched.answerB && Boolean(formik.errors.answerB)
                     // }
@@ -120,7 +120,7 @@ export default function Millionaire({
                     name="answerC"
                     // value={formik.values.answerC}
                     // onChange={formik.handleChange}
-                    // onBlur={formik.handleBLur}
+                    // onBlur={formik.handleBlur}
                     // error={
                     //   formik.touched.answerC && Boolean(formik.errors.answerC)
                     // }
@@ -141,7 +141,7 @@ export default function Millionaire({
                     name="answerD"
                     // value={formik.values.answerD}
                     // onChange={formik.handleChange}
-                    // onBlur={formik.handleBLur}
+                    // onBlur={formik.handleBlur}
                     // error={
                     //   formik.touched.answerD && Boolean(formik.errors.answerD)
                     // }

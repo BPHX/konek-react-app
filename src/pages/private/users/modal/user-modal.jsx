@@ -17,15 +17,19 @@ import { useFormik } from "formik";
 import React from "react";
 import PropTypes from "prop-types";
 import CloseIcon from "@mui/icons-material/Close";
-import TextFieldDatePicker from "../../date-picker/date-picker";
+import TextFieldDatePicker from "../../../../components/date-picker/date-picker";
 import UserSchema, { initialUser } from "./user-schema";
 import Aesthetic from "./aesthetic";
+import RoleSelect from "./role-select";
+import useRoleService from "../../../../hooks/role/use-role-service";
 
 function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
+  const [roles, setRoles] = React.useState([]);
+  const roleService = useRoleService();
   const handleClose = () => {
-    onClose?.();
+    if (!loading) onClose?.();
   };
 
   const formik = useFormik({
@@ -34,20 +38,24 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
     onSubmit: () => {
       setError("");
       setLoading(true);
-      onSubmit?.({ ...user, ...formik?.values })
-        .then(() => {
-          formik?.resetForm();
-          onClose?.();
-          onSuccess?.();
-        })
-        .catch((err) => {
-          setError(err?.message);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      console.log(formik?.values);
+      // onSubmit?.({ ...user, ...formik?.values })
+      //   .then(() => {
+      //     formik?.resetForm();
+      //     onClose?.();
+      //     onSuccess?.();
+      //   })
+      //   .catch((err) => {
+      //     setError(err?.message);
+      //   })
+      //   .finally(() => {
+      //     setLoading(false);
+      //   });
+      setLoading(false);
     },
   });
+
+  console.log(formik.errors);
 
   React.useEffect(() => {
     if (!user) {
@@ -56,6 +64,19 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
       formik?.setValues({ ...user, gender: user.gender || "M" });
     }
   }, [user]);
+
+  React.useEffect(() => {
+    setLoading(true);
+    roleService
+      .list()
+      .then((data) => setRoles(data))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const roleMap = React.useMemo(
+    () => roles.reduce((val, curr) => ({ ...val, [curr.id]: curr.name }), {}),
+    [roles]
+  );
 
   return (
     <Modal
@@ -76,7 +97,7 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
           borderLeft={0}
           borderRight={0}
           borderColor="primary.light"
-          width="100%"
+          width="90%"
           maxWidth="900px"
           borderRadius="6px"
           component="form"
@@ -86,19 +107,28 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
           <Card sx={{ display: "flex", flexDirection: "column" }}>
             <Box
               className="modal-header"
-              py={2}
-              px={1}
               sx={{ display: "flex", maxHeight: "200px" }}
             >
               <Typography
                 variant="h5"
+                px={1}
+                py={2}
                 sx={{ fontWeight: 600, flexGrow: 1, marginLeft: 2 }}
               >
                 User Registration
               </Typography>
-              <IconButton width="50px" onClick={handleClose}>
-                <CloseIcon color="error" sx={{ cursor: "pointer" }} />
-              </IconButton>
+              <Box>
+                <IconButton
+                  width="50px"
+                  onClick={handleClose}
+                  disabled={loading}
+                >
+                  <CloseIcon
+                    color="error"
+                    sx={{ cursor: "pointer", alignSelf: "start" }}
+                  />
+                </IconButton>
+              </Box>
             </Box>
             <Box
               className="modal-content"
@@ -130,7 +160,7 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
                       disabled={loading}
                       value={formik.values.username}
                       onChange={formik.handleChange}
-                      onBlur={formik.handleBLur}
+                      onBlur={formik.handleBlur}
                       error={
                         formik.touched.username &&
                         Boolean(formik.errors.username)
@@ -150,7 +180,7 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
                       disabled={loading}
                       value={formik.values.email}
                       onChange={formik.handleChange}
-                      onBlur={formik.handleBLur}
+                      onBlur={formik.handleBlur}
                       error={
                         formik.touched.email && Boolean(formik.errors.email)
                       }
@@ -167,7 +197,7 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
                       disabled={loading}
                       value={formik.values.firstname}
                       onChange={formik.handleChange}
-                      onBlur={formik.handleBLur}
+                      onBlur={formik.handleBlur}
                       error={
                         formik.touched.firstname &&
                         Boolean(formik.errors.firstname)
@@ -186,7 +216,7 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
                       disabled={loading}
                       value={formik?.values?.lastname}
                       onChange={formik.handleChange}
-                      onBlur={formik.handleBLur}
+                      onBlur={formik.handleBlur}
                       error={
                         formik.touched.lastname &&
                         Boolean(formik.errors.lastname)
@@ -207,7 +237,7 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
                       disabled={loading}
                       value={formik.values.middlename}
                       onChange={formik.handleChange}
-                      onBlur={formik.handleBLur}
+                      onBlur={formik.handleBlur}
                       error={
                         formik.touched.middlename &&
                         Boolean(formik.errors.middlename)
@@ -249,7 +279,7 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
                         disabled={loading}
                         value={formik.values.gender}
                         onChange={formik.handleChange}
-                        onBlur={formik.handleBLur}
+                        onBlur={formik.handleBlur}
                         error={
                           formik.touched.gender && Boolean(formik.errors.gender)
                         }
@@ -261,6 +291,31 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
                         <MenuItem value="M">Male</MenuItem>
                         <MenuItem value="F">Female</MenuItem>
                       </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <FormControl sx={{ width: "100%" }}>
+                      <InputLabel
+                        id="demo-simple-select-label"
+                        sx={{ marginLeft: -2 }}
+                      >
+                        Role
+                      </InputLabel>
+                      <RoleSelect
+                        id="outlined-basic"
+                        label="Role"
+                        name="roles"
+                        variant="standard"
+                        disabled={loading}
+                        items={roles}
+                        value={formik.values.roles}
+                        renderValue={(selected) =>
+                          selected.map((s) => roleMap[s] || "").join(", ")
+                        }
+                        helpertext={formik.touched.roles && formik.errors.roles}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      />
                     </FormControl>
                   </Grid>
                 </Grid>

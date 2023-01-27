@@ -12,14 +12,17 @@ import BookIcon from "@mui/icons-material/Book";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AppLoader from "../../components/loader/app-loader";
 import useAuth, { withAuth } from "../../hooks/auth/use-auth";
-import useToken, { SESSION_TOKEN_KEY, withToken } from "../../hooks/auth/use-token";
+import useToken, {
+  SESSION_TOKEN_KEY,
+  withToken,
+} from "../../hooks/auth/use-token";
 import DashboardPage from "./dashboard/dashboard-page";
 import MiniAppBar from "../../components/appbar/appbar";
 import MiniDrawer from "../../components/drawer/drawer";
 import DrawerListItem from "../../components/drawer/list-item";
-import useUserService from "../../hooks/use-user-service";
+import useUserService from "../../hooks/user/use-user-service";
 import UserRegistration from "./users";
-import AuditLogs from "./logs";
+import AuditLogs from "./audit";
 import RolesPage from "./role";
 import Activity from "./activity";
 import Calendar from "./calendar";

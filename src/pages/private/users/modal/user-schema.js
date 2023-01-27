@@ -1,4 +1,4 @@
-import { string, object, date } from "yup";
+import { string, object, date, array } from "yup";
 
 const UserSchema = object().shape({
   username: string().required("Required"),
@@ -8,6 +8,7 @@ const UserSchema = object().shape({
   middlename: string().required("Required"),
   gender: string().required("Required"),
   dob: date(),
+  roles: array().required("Required"),
 });
 
 export const initialUser = {
@@ -18,5 +19,6 @@ export const initialUser = {
   gender: "",
   email: "",
   dob: new Date(),
+  roles: [],
 };
 export default UserSchema;

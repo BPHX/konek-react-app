@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import RoleInfo from "../../pages/private/role/role-info";
+import RoleModal from "../../pages/private/role/modal/role-modal";
 import useRoleService from "./use-role-service";
 
 export const UserRoleContext = React.createContext([]);
@@ -32,15 +32,25 @@ export function RoleFormProvider({ children }) {
     ];
   }, []);
 
+  const handleSubmit = React.useCallback(
+    (v) => {
+      if (type === "add") {
+        return service.add(v);
+      }
+      return service.update(v);
+    },
+    [type]
+  );
+
   return (
     <UserRoleContext.Provider value={value}>
       {children}
-      <RoleInfo
+      <RoleModal
         open={open}
         role={role}
         onClose={() => setOpen(false)}
         acceptText={type === "add" ? "Register" : "Save"}
-        onSubmit={type === "add" ? service.createUser : service.updateUser}
+        onSubmit={handleSubmit}
         onSuccess={callback?.run}
       />
     </UserRoleContext.Provider>
@@ -54,3 +64,13 @@ export default function useRoleForm() {
 RoleFormProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+export function withRoleForm(Element) {
+  return function ElementWithToken() {
+    return (
+      <RoleFormProvider>
+        <Element />
+      </RoleFormProvider>
+    );
+  };
+}

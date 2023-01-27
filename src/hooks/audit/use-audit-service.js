@@ -1,8 +1,8 @@
 import useRestService, { RestService } from "../rest/use-rest-service";
 
 class AuditService extends RestService {
-  find() {
-    return this.client.get();
+  list() {
+    return this.client.get(`/audit`, { params: {} });
   }
 }
 

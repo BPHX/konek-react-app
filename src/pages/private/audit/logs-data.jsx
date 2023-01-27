@@ -10,6 +10,7 @@ import {
   Typography,
   Skeleton,
 } from "@mui/material";
+import TableSkeleton from "../../../components/skeleton/table-skeleton";
 
 const columns = [
   { field: "id", headerName: "#", width: 70 },
@@ -44,9 +45,7 @@ export default function LogsData() {
           <Grid item xs={6}>
             {loading ? (
               <Box pl={3}>
-                <Skeleton width="200px" height="7vh">
-                  <Typography>.</Typography>
-                </Skeleton>
+                <Skeleton width="200px" height="7vh" />
               </Box>
             ) : (
               <Typography
@@ -84,25 +83,7 @@ export default function LogsData() {
         </Grid>
         <div style={{ height: 570, width: "100%", position: "relative" }}>
           {loading ? (
-            <Box m={1}>
-              <Box
-                sx={{
-                  flexDirection: "row",
-                  display: "flex",
-                }}
-              >
-                {Array(7).fill(
-                  <Skeleton width="200px" height="50px" sx={{ marginRight: 2 }}>
-                    <Typography>.</Typography>
-                  </Skeleton>
-                )}
-              </Box>
-              {Array(7).fill(
-                <Skeleton width="100%" height="70px">
-                  <Typography>.</Typography>
-                </Skeleton>
-              )}
-            </Box>
+            <TableSkeleton />
           ) : (
             <DataGrid
               rows={rows}

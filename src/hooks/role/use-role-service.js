@@ -2,28 +2,27 @@ import useRestService, { RestService } from "../rest/use-rest-service";
 
 class RoleService extends RestService {
   getRolePermissions(id) {
-    return this.client.get(`/role/${id}/permissions`).then(({ data }) => data);
+    return this.client.get(`/role/${id}/permissions`);
   }
 
   getPermissions() {
-    return this.client.get(`/permission`).then(({ data }) => data);
+    return this.client.get(`/permission`);
   }
 
-  getRoles(search) {
-    return this.client
-      .get(`/role`, { params: { search } })
-      .then(({ data }) => data);
+  list(search) {
+    return this.client.get(`/role`, { params: { search } });
   }
 
-  createUser(r) {
-    return this.client.post(`/role/`, r).then(({ data }) => data);
+  create(r) {
+    return this.client.post(`/role/`, r);
   }
 
-  updateUser(r) {
-    return this.client.put(`/role/${r?.id}`, r).then(({ data }) => data);
+  update(r) {
+    return this.client.put(`/role/${r?.id}`, r);
   }
 }
 
 export default function useRoleService() {
-  return useRestService(RoleService);
+  const service = useRestService(RoleService);
+  return service;
 }

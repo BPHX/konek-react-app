@@ -11,7 +11,7 @@ import {
   IconButton,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import useRoleService from "../../../hooks/role/use-role-service";
+import useRoleService from "../../../../hooks/role/use-role-service";
 
 export default function PermissionList({ value, onChange }) {
   const [loading, setLoading] = React.useState(true);
@@ -29,10 +29,10 @@ export default function PermissionList({ value, onChange }) {
 
   const columns = [
     { field: "id", headerName: "Permission", width: 250 },
-    { field: "description", headerName: "Description", width: 830 },
+    { field: "description", headerName: "Description", flex: 1 },
     {
       field: "ability",
-      headerName: "Enable/Disable",
+      headerName: "Allowed",
       width: 130,
       type: "actions",
       // eslint-disable-next-line react/no-unstable-nested-components
@@ -70,16 +70,14 @@ export default function PermissionList({ value, onChange }) {
   }, []);
 
   return (
-    <Box>
-      <div style={{ height: 400, width: "80vw" }}>
-        <DataGrid
-          rows={permissions}
-          columns={columns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-          loading={loading}
-        />
-      </div>
+    <Box style={{ height: 400, width: "100%" }}>
+      <DataGrid
+        rows={permissions}
+        columns={columns}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
+        loading={loading}
+      />
     </Box>
   );
 }

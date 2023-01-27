@@ -50,7 +50,7 @@ function SignInForm() {
           disabled={loading}
           value={formik.values.username}
           onChange={formik.handleChange}
-          onBlur={formik.handleBLur}
+          onBlur={formik.handleBlur}
           error={formik.touched.username && Boolean(formik.errors.username)}
           helpertext={formik.touched.username && formik.errors.username}
           color="white"
@@ -69,7 +69,7 @@ function SignInForm() {
           disabled={loading}
           value={formik.values.password}
           onChange={formik.handleChange}
-          onBlur={formik.handleBLur}
+          onBlur={formik.handleBlur}
           error={formik.touched.password && Boolean(formik.errors.password)}
           helpertext={formik.touched.password && formik.errors.password}
           sx={{

@@ -19,8 +19,18 @@ export default function useRestService(Service = RestService) {
       headers: {
         authorization: token,
       },
+      transformResponse: [
+        function onData(data) {
+          return JSON.parse(data);
+        },
+      ],
     });
-    return new Service(client);
+    return new Service({
+      get: (...props) => client.get(...props).then(({ data }) => data),
+      post: (...props) => client.post(...props).then(({ data }) => data),
+      put: (...props) => client.put(...props).then(({ data }) => data),
+      delete: (...props) => client.delete(...props).then(({ data }) => data),
+    });
   }, [config]);
 
   return service;
