@@ -7,7 +7,7 @@ import useRoleForm, { withRoleForm } from "../../../hooks/role/use-role-form";
 import useRoleService from "../../../hooks/role/use-role-service";
 import RoleListing from "./role-listing";
 
-function UserRegistration() {
+function RoleRegistration() {
   const [loading, setLoading] = React.useState(true);
   const [search, setSearch] = React.useState("");
   const [roles, setRoles] = React.useState([]);
@@ -17,7 +17,7 @@ function UserRegistration() {
 
   const handleSearch = () => {
     roleService
-      .getRoles(search)
+      .list(search)
       .then((u) => setRoles(u))
       .finally(() => setLoading(false));
   };
@@ -72,4 +72,4 @@ function UserRegistration() {
   );
 }
 
-export default withRoleForm(UserRegistration);
+export default withRoleForm(RoleRegistration);
