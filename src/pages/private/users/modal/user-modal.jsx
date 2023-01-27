@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {
   Box,
   Button,
@@ -38,24 +37,21 @@ function UserModal({ open, onClose, user, acceptText, onSubmit, onSuccess }) {
     onSubmit: () => {
       setError("");
       setLoading(true);
-      console.log(formik?.values);
-      // onSubmit?.({ ...user, ...formik?.values })
-      //   .then(() => {
-      //     formik?.resetForm();
-      //     onClose?.();
-      //     onSuccess?.();
-      //   })
-      //   .catch((err) => {
-      //     setError(err?.message);
-      //   })
-      //   .finally(() => {
-      //     setLoading(false);
-      //   });
+      onSubmit?.({ ...user, ...formik?.values })
+        .then(() => {
+          formik?.resetForm();
+          onClose?.();
+          onSuccess?.();
+        })
+        .catch((err) => {
+          setError(err?.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
       setLoading(false);
     },
   });
-
-  console.log(formik.errors);
 
   React.useEffect(() => {
     if (!user) {
