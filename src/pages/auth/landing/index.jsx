@@ -31,7 +31,7 @@ function LandingPage() {
       </Slide>
       <Zoom in={!open}>
         <Box className="intro">
-          <Box mb="10vw">
+          <Box>
             <Link to="/landing">
               <Logo lg />
             </Link>
