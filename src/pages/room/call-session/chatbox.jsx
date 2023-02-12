@@ -71,7 +71,7 @@ export default function Chatbox() {
               <CloseIcon onClick={() => setVisible(false)} />
             </IconButton>
           }
-          title="Valorant 101"
+          title="Chat Box"
         />
         <Divider sx={{ height: 5, width: "100%" }} />
         <Box flexGrow={1} sx={{ overflowY: "auto" }}>
